@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Language Gems</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
+    <link rel="stylesheet" href="/styles/menu.css">
+    <link rel="stylesheet" href="/styles/resources.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/scripts/dashboard-auth.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="resources-container">
+                <div class="resources-header">
+                    <h2>Learning Resources</h2>
+                    <div class="resources-search">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search resources...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <!-- Textbooks Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-book"></i> Textbooks</h3>
+                            <button class="btn btn-primary" data-resource-type="textbook">
+                                <i class="fas fa-plus"></i> Add Textbook
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="textbooksContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Online Courses Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-laptop"></i> Online Courses</h3>
+                            <button class="btn btn-primary" data-resource-type="course">
+                                <i class="fas fa-plus"></i> Add Course
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="coursesContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Videos Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-video"></i> Videos</h3>
+                            <button class="btn btn-primary" data-resource-type="video">
+                                <i class="fas fa-plus"></i> Add Video
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="videosContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Podcasts Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-podcast"></i> Podcasts</h3>
+                            <button class="btn btn-primary" data-resource-type="podcast">
+                                <i class="fas fa-plus"></i> Add Podcast
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="podcastsContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Websites Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-globe"></i> Websites</h3>
+                            <button class="btn btn-primary" data-resource-type="website">
+                                <i class="fas fa-plus"></i> Add Website
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="websitesContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Apps Section -->
+                    <div class="resource-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-mobile-alt"></i> Apps</h3>
+                            <button class="btn btn-primary" data-resource-type="app">
+                                <i class="fas fa-plus"></i> Add App
+                            </button>
+                        </div>
+                        <div class="resource-cards" id="appsContainer">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit Resource Modal -->
+            <div class="modal" id="resourceModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Add Resource</h3>
+                        <button class="close-btn" id="closeResourceModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="resourceForm">
+                            <div class="form-group">
+                                <label for="resourceTitle">Title</label>
+                                <input type="text" id="resourceTitle" required placeholder="Enter resource title">
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceType">Type</label>
+                                <select id="resourceType" required>
+                                    <option value="textbook">Textbook</option>
+                                    <option value="course">Online Course</option>
+                                    <option value="video">Video</option>
+                                    <option value="podcast">Podcast</option>
+                                    <option value="website">Website</option>
+                                    <option value="app">App</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceUrl">URL/Link</label>
+                                <input type="url" id="resourceUrl" placeholder="Enter resource URL">
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceAuthor">Author/Creator</label>
+                                <input type="text" id="resourceAuthor" placeholder="Enter author or creator name">
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceLevel">Level</label>
+                                <select id="resourceLevel">
+                                    <option value="beginner">Beginner (A1-A2)</option>
+                                    <option value="intermediate">Intermediate (B1-B2)</option>
+                                    <option value="advanced">Advanced (C1-C2)</option>
+                                    <option value="all">All Levels</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceTags">Tags</label>
+                                <input type="text" id="resourceTags" placeholder="Add tags (comma separated)">
+                                <div class="tags-preview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceDescription">Description</label>
+                                <textarea id="resourceDescription" rows="3" placeholder="Add resource description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="resourceFavorite">
+                                    Mark as Favorite
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="cancelResourceBtn">Cancel</button>
+                        <button class="btn btn-primary" id="saveResourceBtn">Save Resource</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Details Modal -->
+            <div class="modal" id="resourceDetailsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="detailsTitle"></h3>
+                        <div class="modal-actions">
+                            <button class="action-btn" id="favoriteResourceBtn" title="Favorite">
+                                <i class="far fa-star"></i>
+                            </button>
+                            <button class="action-btn" id="editResourceBtn" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn" id="shareResourceBtn" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="close-btn" id="closeDetailsModal">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="resource-metadata">
+                            <div class="metadata-row">
+                                <i class="fas fa-user"></i>
+                                <span id="detailsAuthor"></span>
+                            </div>
+                            <div class="metadata-row">
+                                <i class="fas fa-signal"></i>
+                                <span id="detailsLevel"></span>
+                            </div>
+                            <div class="metadata-row">
+                                <i class="fas fa-tags"></i>
+                                <div id="detailsTags" class="tags-list"></div>
+                            </div>
+                        </div>
+                        <div class="resource-description" id="detailsDescription"></div>
+                        <div class="resource-link">
+                            <a href="#" id="detailsUrl" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Open Resource
+                            </a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" id="deleteResourceBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '/scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const menuScript = document.createElement('script');
+            menuScript.src = '/scripts/load-menu.js';
+            document.body.appendChild(menuScript);
+
+            const resourcesScript = document.createElement('script');
+            resourcesScript.src = '/scripts/resources.js';
+            document.body.appendChild(resourcesScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

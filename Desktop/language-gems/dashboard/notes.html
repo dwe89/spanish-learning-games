@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/notes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="notes-container">
+                <div class="notes-header">
+                    <h2>My Notes</h2>
+                    <button class="btn btn-primary" id="newNoteBtn">
+                        <i class="fas fa-plus"></i> New Note
+                    </button>
+                </div>
+
+                <div class="notes-content">
+                    <div class="notes-sidebar">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchNotes" placeholder="Search notes...">
+                        </div>
+
+                        <div class="notes-categories">
+                            <h3>Categories</h3>
+                            <div class="category-list">
+                                <button class="category-btn active" data-category="all">
+                                    <i class="fas fa-folder"></i> All Notes
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="category-btn" data-category="vocabulary">
+                                    <i class="fas fa-book"></i> Vocabulary
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="category-btn" data-category="grammar">
+                                    <i class="fas fa-pencil-alt"></i> Grammar
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="category-btn" data-category="phrases">
+                                    <i class="fas fa-comments"></i> Phrases
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="category-btn" data-category="lessons">
+                                    <i class="fas fa-graduation-cap"></i> Lessons
+                                    <span class="count">0</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="notes-tags">
+                            <h3>Tags</h3>
+                            <div class="tags-cloud" id="tagsCloud">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notes-main">
+                        <div class="notes-toolbar">
+                            <div class="view-options">
+                                <button class="view-btn active" data-view="grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                            <div class="sort-options">
+                                <select id="sortNotes">
+                                    <option value="recent">Most Recent</option>
+                                    <option value="title">Title</option>
+                                    <option value="category">Category</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="notes-grid" id="notesList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Note Modal -->
+            <div class="modal" id="noteModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>New Note</h3>
+                        <button class="close-btn">×</button>
+                    </div>
+                    <form id="noteForm">
+                        <div class="form-group">
+                            <label for="noteTitle">Title</label>
+                            <input type="text" id="noteTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="noteCategory">Category</label>
+                            <select id="noteCategory" required>
+                                <option value="vocabulary">Vocabulary</option>
+                                <option value="grammar">Grammar</option>
+                                <option value="phrases">Phrases</option>
+                                <option value="lessons">Lessons</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="noteTags">Tags</label>
+                            <input type="text" id="noteTags" placeholder="Add tags separated by commas">
+                            <div class="tags-preview" id="tagsPreview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="noteContent">Content</label>
+                            <div class="editor-toolbar">
+                                <button type="button" class="format-btn" data-format="bold">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button type="button" class="format-btn" data-format="italic">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button type="button" class="format-btn" data-format="underline">
+                                    <i class="fas fa-underline"></i>
+                                </button>
+                                <button type="button" class="format-btn" data-format="list-ul">
+                                    <i class="fas fa-list-ul"></i>
+                                </button>
+                                <button type="button" class="format-btn" data-format="list-ol">
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                            </div>
+                            <div class="editor" id="noteContent" contenteditable="true"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelNote">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Note</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const notesScript = document.createElement('script');
+            notesScript.src = '../scripts/notes.js';
+            document.body.appendChild(notesScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

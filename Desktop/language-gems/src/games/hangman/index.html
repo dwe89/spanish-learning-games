@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Ultimate Hangman Challenge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script type="module">
+        // Load environment variables from window.ENV (set by your server)
+        const supabaseUrl = window.ENV?.SUPABASE_URL;
+        const supabaseAnonKey = window.ENV?.SUPABASE_ANON_KEY;
+
+        if (!supabaseUrl || !supabaseAnonKey) {
+            console.error('Missing Supabase credentials');
+        }
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header Section -->
+        <header class="game-header">
+            <div class="nav-header">
+                <h1 class="title">🎮 Ultimate Hangman Challenge 🎮</h1>
+            </div>
+            <nav class="controls">
+                <div class="control-item">
+                    <a href="../index.html" class="btn-icon"><i class="fas fa-home"></i></a>
+                    <div class="icon-label">home</div>
+                </div>
+                <div class="control-item">
+                    <button id="soundToggleBtn" class="btn-icon"><i class="fas fa-volume-up"></i></button>
+                    <div class="icon-label">sound</div>
+                </div>
+                <div class="control-item">
+                    <button id="musicToggleBtn" class="btn-icon"><i class="fas fa-music"></i></button>
+                    <div class="icon-label">music</div>
+                </div>
+                <div class="control-item">
+                    <button id="fullscreenBtn" class="btn-icon"><i class="fas fa-expand"></i></button>
+                    <div class="icon-label">fullscreen</div>
+                </div>
+                <div class="control-item">
+                    <button id="highScoresBtn" class="btn-icon"><i class="fas fa-trophy"></i></button>
+                    <div class="icon-label">scores</div>
+                </div>
+                <div class="control-item">
+                    <button id="instructionsBtn" class="btn-icon"><i class="fas fa-book"></i></button>
+                    <div class="icon-label">help</div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Game Stats Section -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <div id="timer" class="stat-value">00:00</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <div id="currentScore" class="stat-value">0</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-bolt"></i>
+                <div id="streak" class="stat-value">Streak: 0</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-trophy text-gold"></i>
+                <div class="stat-value">Wins: <span id="wins">0</span></div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-times-circle text-red"></i>
+                <div class="stat-value">Losses: <span id="losses">0</span></div>
+            </div>
+        </div>
+
+        <!-- Game Settings Section -->
+        <div class="game-settings">
+            <div class="settings-group">
+                <select id="categorySelect" class="select-style">
+                    <option value="random">Random Category</option>
+                    <option value="animals">Animals</option>
+                    <option value="countries">Countries</option>
+                    <option value="food">Food</option>
+                    <option value="movies">Movies</option>
+                    <option value="sports">Sports</option>
+                    <option value="technology">Technology</option>
+                    <option value="science">Science</option>
+                </select>
+                <input type="text" id="wordInput" placeholder="Enter Word or Phrase" class="input-style" />
+            </div>
+            <div class="button-group">
+                <button id="startGameBtn" class="btn primary-btn pulse-animation">Start Game</button>
+                <button id="customListBtn" class="btn secondary-btn">Custom Word List</button>
+                <button id="hintBtn" class="btn hint-btn">
+                    <i class="fas fa-lightbulb"></i> Get a Hint
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-play-area">
+            <div class="game-left">
+                <div class="hangman-container">
+                    <canvas id="hangmanCanvas" width="300" height="300"></canvas>
+                </div>
+            </div>
+            <div class="game-right">
+                <div class="word-display">
+                    <h2 id="displayWord" class="glow-text">_ _ _ _ _</h2>
+                </div>
+                <div id="lettersContainer" class="letters-container">
+                    <!-- Letters will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Modal -->
+        <div id="instructionsModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-book"></i> How to Play</h2>
+                <div class="instructions-grid">
+                    <div class="instruction-item">
+                        <i class="fas fa-play"></i>
+                        <p>1. Choose a category or enter your own word/phrase, then click Start Game</p>
+                    </div>
+                    <div class="instruction-item">
+                        <i class="fas fa-keyboard"></i>
+                        <p>2. Guess letters by clicking them or using your keyboard</p>
+                    </div>
+                    <div class="instruction-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>3. Use the hint button to reveal one letter</p>
+                    </div>
+                </div>
+                <button class="btn close-btn" onclick="closeModal('instructionsModal')">Got it!</button>
+            </div>
+        </div>
+
+        <!-- Background Music -->
+        <audio id="backgroundMusic" src="assets/music/background.mp3" preload="auto"></audio>
+
+        <!-- Victory Modal -->
+        <div id="victoryModal" class="modal">
+            <div class="modal-content victory">
+                <div class="victory-header">
+                    <h2><i class="fas fa-crown"></i> ¡Victoria!</h2>
+                    <div class="confetti-container"></div>
+                </div>
+                <div class="victory-stats">
+                    <div id="victoryStats"></div>
+                    <div class="victory-buttons">
+                        <button id="nextWordBtn" class="btn next-word-btn" onclick="window.resetGame()">
+                            <i class="fas fa-forward"></i> Next Word
+                        </button>
+                        <button class="btn close-btn" onclick="window.closeModal('victoryModal')">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <p id="gameOverText"></p>
+                <button id="newGameBtn">New Game</button>
+            </div>
+        </div>
+
+        <!-- Custom Victory Modal -->
+        <div id="customVictoryModal" class="modal">
+            <div class="modal-content victory">
+                <!-- Content will be dynamically updated -->
+            </div>
+        </div>
+
+        <!-- Custom Game Over Modal -->
+        <div id="customGameOverModal" class="modal hidden">
+            <div class="modal-content game-over">
+                <h2>Game Over</h2>
+                <div id="customGameOverMessage"></div>
+                <div class="game-over-buttons">
+                    <button id="tryAgainBtn" class="btn try-again-btn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                    <button id="customNextWordBtn" class="btn next-word-btn">
+                        <i class="fas fa-forward"></i> Next Word
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sound Effects -->
+        <audio id="correctSound" src="assets/sounds/correct.mp3" preload="auto"></audio>
+        <audio id="wrongSound" src="assets/sounds/wrong.mp3" preload="auto"></audio>
+        <audio id="winSound" src="assets/sounds/win.mp3" preload="auto"></audio>
+        <audio id="loseSound" src="assets/sounds/lose.mp3" preload="auto"></audio>
+        <audio id="powerupSound" src="assets/sounds/powerup.placeholder.mp3"></audio>
+
+        <!-- Add High Scores Modal -->
+        <div id="highScoresModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-trophy"></i> High Scores</h2>
+                <div id="highScoresList">
+                    <p>Current Streak: 0</p>
+                    <p>Total Wins: 0</p>
+                    <p>Total Losses: 0</p>
+                </div>
+                <button class="btn close-btn" onclick="closeModal('highScoresModal')">Close</button>
+            </div>
+        </div>
+
+        <!-- Custom Word List Modal -->
+        <div id="customListModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-list"></i> Custom Word List</h2>
+                <div class="custom-list-instructions">
+                    <p>Type or paste comma-separated words (e.g., "cat, dog, bird")</p>
+                </div>
+                <div class="custom-list-controls">
+                    <div class="word-input-group">
+                        <input type="text" id="customWordInput" placeholder="Enter a word" class="input-style">
+                        <button id="addToListBtn" class="btn">Add Word</button>
+                    </div>
+                    <div id="customWordDisplay" class="word-display">
+                        <!-- Words will be added here dynamically -->
+                    </div>
+                    <div class="button-group">
+                        <button id="saveWordBtn" class="btn">💾 Save to Cloud</button>
+                        <button id="startCustomListBtn" class="btn primary-btn">Start Game with Custom Words</button>
+                    </div>
+                </div>
+                
+                <!-- Saved Word Lists Section -->
+                <div class="saved-lists-section">
+                    <h3>Saved Word Lists</h3>
+                    <div id="savedWordLists" class="saved-lists-container">
+                        <!-- Word lists will be loaded here -->
+                    </div>
+                </div>
+                
+                <button class="btn close-btn">Close</button>
+            </div>
+        </div>
+
+        <!-- Replace Firebase scripts with Supabase -->
+        <script type="module" src="../../src/authentication/supabase-client.js"></script>
+        <script type="module" src="supabase-word-lists.js"></script>
+
+        <!-- Test Connection Button -->
+        <button id="testConnection" onclick="testSupabaseConnection()">Test Supabase Connection</button>
+
+        <button id="authCheck" style="position: fixed; top: 50px; right: 10px; z-index: 1000;">
+            Check Auth Status
+        </button>
+
+        <div style="position: fixed; top: 0; right: 0; z-index: 1000;">
+            <button id="testSave">Test Save Function</button>
+            <button id="testAuth">Test Auth Status</button>
+        </div>
+
+        <script type="module">
+        import { supabase } from '../../src/authentication/supabase-client.js';
+
+        window.testSupabaseConnection = async () => {
+            try {
+                const { data, error } = await supabase.from('word_lists').select('count');
+                if (error) throw error;
+                alert('Supabase connection working!');
+            } catch (err) {
+                console.error('Connection test failed:', err);
+                alert('Connection test failed. Check console for details.');
+            }
+        };
+        </script>
+
+        <script>
+        document.getElementById('newGameBtn').addEventListener('click', () => {
+            if (typeof startNextWord === 'function') {
+                startNextWord();
+            } else {
+                window.location.reload();
+            }
+        });
+        </script>
+
+        <script>
+        // Add error reporting
+        window.addEventListener('error', function(e) {
+            console.error('Unhandled Error:', e.error);
+            alert(`Critical Error: ${e.message}\nPlease refresh the page.`);
+        });
+        </script>
+
+        <!-- Add saved words section after game controls -->
+        <div class="saved-words-section">
+            <h3>Saved Words</h3>
+            <ul id="savedWordsList" class="saved-words-list"></ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+/* Blog Layout */
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-main {
+    padding-right: var(--space-xl);
+    border-right: 1px solid var(--border-color);
+}
+
+/* Featured Posts */
+.featured-post {
+    margin-bottom: var(--space-2xl);
+}
+
+.blog-post {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-category {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--accent-color);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.post-content {
+    padding: var(--space-md);
+}
+
+.post-meta {
+    display: flex;
+    gap: var(--space-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.post-category-tag {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+.post-excerpt {
+    margin: var(--space-md) 0;
+    color: var(--text-secondary);
+}
+
+.read-more-button {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: background-color 0.3s;
+}
+
+.read-more-button:hover {
+    background: var(--secondary-color);
+}
+
+/* Blog Sidebar */
+.blog-sidebar {
+    padding: var(--space-lg);
+}
+
+.sidebar-widget {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    backdrop-filter: blur(10px);
+}
+
+.widget-title {
+    font-size: var(--font-size-lg);
+    color: var(--white);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-main {
+        padding-right: 0;
+        border-right: none;
+    }
+
+    .post-meta {
+        flex-wrap: wrap;
+    }
+} 

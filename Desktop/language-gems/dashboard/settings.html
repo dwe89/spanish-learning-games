@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Language Gems</title>
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../styles/base/reset.css">
+    <link rel="stylesheet" href="../styles/base/typography.css">
+    <link rel="stylesheet" href="../styles/base/variables.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/settings.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Scripts -->
+    <script type="module">
+        import { DashboardAuth } from '../scripts/dashboard-auth.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            if (await DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                loadingOverlay.classList.remove('active');
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        async function loadScripts() {
+            const scripts = [
+                '../scripts/load-menu.js',
+                '../scripts/settings.js'
+            ].map(src => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.type = 'module';
+                document.body.appendChild(script);
+                return new Promise(resolve => script.onload = resolve);
+            });
+
+            await Promise.all(scripts);
+        }
+    </script>
+</head>
+<body style="visibility: hidden;">
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <div class="nav-section">
+                    <h3>Settings</h3>
+                    <a href="#profile" class="nav-item active" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
+                    <a href="#account" class="nav-item" data-section="account">
+                        <i class="fas fa-user-circle"></i>
+                        Account
+                    </a>
+                    <a href="#preferences" class="nav-item" data-section="preferences">
+                        <i class="fas fa-cog"></i>
+                        Preferences
+                    </a>
+                    <a href="#notifications" class="nav-item" data-section="notifications">
+                        <i class="fas fa-bell"></i>
+                        Notifications
+                    </a>
+                    <a href="#privacy" class="nav-item" data-section="privacy">
+                        <i class="fas fa-shield-alt"></i>
+                        Privacy
+                    </a>
+                    <a href="#language" class="nav-item" data-section="language">
+                        <i class="fas fa-language"></i>
+                        Language
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Profile Section -->
+            <section id="profile" class="settings-section active">
+                <h2>Profile Settings</h2>
+                <div class="settings-content">
+                    <div class="avatar-section">
+                        <div class="avatar-container">
+                            <img src="../assets/default-avatar.png" alt="Profile Avatar" class="user-avatar" id="userAvatar">
+                            <label for="avatarUpload" class="avatar-upload-label">
+                                <i class="fas fa-camera"></i>
+                                <span>Change Photo</span>
+                            </label>
+                            <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <form id="profileForm" class="settings-form">
+                                <div class="form-group">
+                                    <label for="displayName">Display Name</label>
+                            <input type="text" id="displayName" name="displayName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                            <label for="learningGoal">Learning Goal</label>
+                            <select id="learningGoal" name="learningGoal">
+                                <option value="beginner">Beginner - Learn Basics</option>
+                                <option value="intermediate">Intermediate - Improve Skills</option>
+                                <option value="advanced">Advanced - Master Language</option>
+                                <option value="professional">Professional - Business Spanish</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Profile</button>
+                    </form>
+                </div>
+            </section>
+
+                        <!-- Account Section -->
+            <section id="account" class="settings-section">
+                <h2>Account Settings</h2>
+                <div class="settings-content">
+                    <form id="accountForm" class="settings-form">
+                                <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" name="currentPassword">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" name="newPassword">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword">
+                        </div>
+                        <button type="submit" class="btn-primary">Update Account</button>
+                    </form>
+                    <div class="danger-zone">
+                        <h3>Danger Zone</h3>
+                        <button id="deactivateAccount" class="btn-danger">Deactivate Account</button>
+                        <button id="deleteAccount" class="btn-danger">Delete Account</button>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Preferences Section -->
+            <section id="preferences" class="settings-section">
+                <h2>Preferences</h2>
+                <div class="settings-content">
+                    <form id="preferencesForm" class="settings-form">
+                        <div class="form-group">
+                            <label>Theme</label>
+                            <div class="theme-selector">
+                                <label class="radio-label">
+                                    <input type="radio" name="theme" value="light">
+                                    Light
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="theme" value="dark">
+                                    Dark
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="theme" value="system">
+                                    System
+                                    </label>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Study Reminders</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="studyReminders" value="daily">
+                                    Daily Reminders
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="studyReminders" value="weekly">
+                                    Weekly Progress Report
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="studyGoal">Daily Study Goal</label>
+                            <select id="studyGoal" name="studyGoal">
+                                <option value="15">15 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="90">1.5 hours</option>
+                                <option value="120">2 hours</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Preferences</button>
+                    </form>
+                </div>
+            </section>
+
+                        <!-- Notifications Section -->
+            <section id="notifications" class="settings-section">
+                <h2>Notification Settings</h2>
+                <div class="settings-content">
+                    <form id="notificationsForm" class="settings-form">
+                        <div class="form-group">
+                            <h3>Email Notifications</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="emailNotifications" value="assignments">
+                                    New Assignments
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="emailNotifications" value="feedback">
+                                    Teacher Feedback
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="emailNotifications" value="progress">
+                                    Progress Updates
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="emailNotifications" value="achievements">
+                                    Achievement Unlocked
+                                    </label>
+                                </div>
+                                    </div>
+                        <div class="form-group">
+                            <h3>Push Notifications</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="pushNotifications" value="reminders">
+                                    Study Reminders
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="pushNotifications" value="messages">
+                                    New Messages
+                                    </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="pushNotifications" value="deadlines">
+                                    Assignment Deadlines
+                                    </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Notification Settings</button>
+                    </form>
+                </div>
+            </section>
+
+                        <!-- Privacy Section -->
+            <section id="privacy" class="settings-section">
+                <h2>Privacy Settings</h2>
+                <div class="settings-content">
+                    <form id="privacyForm" class="settings-form">
+                        <div class="form-group">
+                            <h3>Profile Visibility</h3>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="profileVisibility" value="public">
+                                    Public - Anyone can see your profile
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="profileVisibility" value="students">
+                                    Students Only - Only other students can see your profile
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="profileVisibility" value="private">
+                                    Private - Only you and your teachers can see your profile
+                                    </label>
+                                </div>
+                                    </div>
+                        <div class="form-group">
+                            <h3>Activity Sharing</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="activitySharing" value="progress">
+                                    Share Progress
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="activitySharing" value="achievements">
+                                    Share Achievements
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="activitySharing" value="leaderboard">
+                                    Appear on Leaderboards
+                                    </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Privacy Settings</button>
+                    </form>
+                </div>
+            </section>
+
+                        <!-- Language Section -->
+            <section id="language" class="settings-section">
+                <h2>Language Settings</h2>
+                <div class="settings-content">
+                    <form id="languageForm" class="settings-form">
+                        <div class="form-group">
+                            <label for="interfaceLanguage">Interface Language</label>
+                            <select id="interfaceLanguage" name="interfaceLanguage">
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                        <option value="fr">Français</option>
+                                        <option value="de">Deutsch</option>
+                                    </select>
+                                </div>
+                        <div class="form-group">
+                            <label for="learningLanguage">Learning Language</label>
+                            <select id="learningLanguage" name="learningLanguage">
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                        <option value="it">Italian</option>
+                                    </select>
+                                </div>
+                        <div class="form-group">
+                            <label for="proficiencyLevel">Proficiency Level</label>
+                            <select id="proficiencyLevel" name="proficiencyLevel">
+                                <option value="A1">A1 - Beginner</option>
+                                <option value="A2">A2 - Elementary</option>
+                                <option value="B1">B1 - Intermediate</option>
+                                <option value="B2">B2 - Upper Intermediate</option>
+                                <option value="C1">C1 - Advanced</option>
+                                <option value="C2">C2 - Mastery</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Language Settings</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" style="display: none;"></div>
+
+    <!-- Error Message -->
+    <div class="error-message" style="display: none;"></div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Confirmation Required</h3>
+            <p id="confirmationMessage"></p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancelAction">Cancel</button>
+                <button class="btn-danger" id="confirmAction">Confirm</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

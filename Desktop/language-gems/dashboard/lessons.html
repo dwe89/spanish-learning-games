@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/lessons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="lessons-container">
+                <div class="lessons-header">
+                    <h2>My Lessons</h2>
+                    <div class="lessons-filters">
+                        <select id="levelFilter">
+                            <option value="all">All Levels</option>
+                            <option value="beginner">Beginner (A1-A2)</option>
+                            <option value="intermediate">Intermediate (B1-B2)</option>
+                            <option value="advanced">Advanced (C1-C2)</option>
+                        </select>
+                        <select id="topicFilter">
+                            <option value="all">All Topics</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="vocabulary">Vocabulary</option>
+                            <option value="conversation">Conversation</option>
+                            <option value="culture">Culture</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="current-lesson">
+                    <h3>Continue Learning</h3>
+                    <div class="lesson-card featured">
+                        <div class="lesson-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%"></div>
+                            </div>
+                            <span>60% Complete</span>
+                        </div>
+                        <h4>Present Tense Conjugation</h4>
+                        <p>Master the basics of Spanish present tense verb conjugation.</p>
+                        <div class="lesson-meta">
+                            <span><i class="fas fa-clock"></i> 30 mins</span>
+                            <span><i class="fas fa-signal"></i> Beginner</span>
+                        </div>
+                        <button class="btn-primary">Continue Lesson</button>
+                    </div>
+                </div>
+
+                <div class="lesson-paths">
+                    <h3>Learning Paths</h3>
+                    <div class="paths-grid">
+                        <div class="path-card">
+                            <div class="path-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4>Everyday Conversations</h4>
+                            <p>Learn essential phrases and vocabulary for daily communication.</p>
+                            <div class="path-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 40%"></div>
+                                </div>
+                                <span>4/10 Lessons</span>
+                            </div>
+                            <button class="btn-secondary">View Path</button>
+                        </div>
+
+                        <div class="path-card">
+                            <div class="path-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h4>Grammar Fundamentals</h4>
+                            <p>Build a strong foundation in Spanish grammar.</p>
+                            <div class="path-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 20%"></div>
+                                </div>
+                                <span>2/10 Lessons</span>
+                            </div>
+                            <button class="btn-secondary">View Path</button>
+                        </div>
+
+                        <div class="path-card">
+                            <div class="path-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h4>Cultural Insights</h4>
+                            <p>Explore Spanish-speaking cultures and traditions.</p>
+                            <div class="path-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 10%"></div>
+                                </div>
+                                <span>1/10 Lessons</span>
+                            </div>
+                            <button class="btn-secondary">View Path</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommended-lessons">
+                    <h3>Recommended for You</h3>
+                    <div class="lessons-grid">
+                        <div class="lesson-card">
+                            <div class="lesson-thumbnail">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h4>Food and Dining</h4>
+                            <p>Learn vocabulary for ordering food and dining out.</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 20 mins</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                            <button class="btn-primary">Start Lesson</button>
+                        </div>
+
+                        <div class="lesson-card">
+                            <div class="lesson-thumbnail">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <h4>Travel Essentials</h4>
+                            <p>Essential phrases for traveling in Spanish-speaking countries.</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 mins</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                            <button class="btn-primary">Start Lesson</button>
+                        </div>
+
+                        <div class="lesson-card">
+                            <div class="lesson-thumbnail">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h4>Shopping Vocabulary</h4>
+                            <p>Learn how to shop and bargain in Spanish.</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 15 mins</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                            <button class="btn-primary">Start Lesson</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (await DashboardAuth.checkAuth()) {
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

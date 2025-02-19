@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h2>Learning Calendar</h2>
+                    <div class="calendar-actions">
+                        <button class="btn btn-secondary" id="todayBtn">Today</button>
+                        <div class="calendar-nav">
+                            <button class="nav-btn" id="prevMonth">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <h3 id="currentMonth">September 2023</h3>
+                            <button class="nav-btn" id="nextMonth">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="month">Month</button>
+                            <button class="view-btn" data-view="week">Week</button>
+                            <button class="view-btn" data-view="day">Day</button>
+                        </div>
+                        <button class="btn btn-primary" id="newEventBtn">
+                            <i class="fas fa-plus"></i> New Event
+                        </button>
+                    </div>
+                </div>
+
+                <div class="calendar-sidebar">
+                    <div class="mini-calendar" id="miniCalendar">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <div class="calendar-filters">
+                        <h4>Event Types</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked data-type="lesson">
+                                <span class="color-dot lesson"></span>
+                                Lessons
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" checked data-type="practice">
+                                <span class="color-dot practice"></span>
+                                Practice Sessions
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" checked data-type="assignment">
+                                <span class="color-dot assignment"></span>
+                                Assignments
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" checked data-type="exam">
+                                <span class="color-dot exam"></span>
+                                Exams
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" checked data-type="meeting">
+                                <span class="color-dot meeting"></span>
+                                Study Group Meetings
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-events">
+                        <h4>Upcoming Events</h4>
+                        <div class="events-list">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar-main">
+                    <div class="calendar-grid">
+                        <div class="calendar-days">
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                        </div>
+                        <div class="calendar-dates" id="calendarDates">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Event Modal -->
+            <div class="modal" id="eventModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>New Event</h3>
+                        <button class="close-btn" id="closeEventModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="eventForm">
+                            <div class="form-group">
+                                <label for="eventTitle">Event Title</label>
+                                <input type="text" id="eventTitle" required placeholder="Enter event title">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventType">Event Type</label>
+                                <select id="eventType" required>
+                                    <option value="lesson">Lesson</option>
+                                    <option value="practice">Practice Session</option>
+                                    <option value="assignment">Assignment</option>
+                                    <option value="exam">Exam</option>
+                                    <option value="meeting">Study Group Meeting</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventDate">Date</label>
+                                    <input type="date" id="eventDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventTime">Time</label>
+                                    <input type="time" id="eventTime" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDuration">Duration</label>
+                                <select id="eventDuration" required>
+                                    <option value="30">30 minutes</option>
+                                    <option value="60">1 hour</option>
+                                    <option value="90">1.5 hours</option>
+                                    <option value="120">2 hours</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDescription">Description</label>
+                                <textarea id="eventDescription" rows="3" placeholder="Add event description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="eventReminder">
+                                    Set Reminder
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="cancelEventBtn">Cancel</button>
+                        <button class="btn btn-primary" id="saveEventBtn">Save Event</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Details Modal -->
+            <div class="modal" id="eventDetailsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="detailsTitle"></h3>
+                        <button class="close-btn" id="closeDetailsModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <i class="fas fa-calendar"></i>
+                                <span id="detailsDate"></span>
+                            </div>
+                            <div class="detail-row">
+                                <i class="fas fa-clock"></i>
+                                <span id="detailsTime"></span>
+                            </div>
+                            <div class="detail-row">
+                                <i class="fas fa-tag"></i>
+                                <span id="detailsType"></span>
+                            </div>
+                            <div class="detail-row">
+                                <i class="fas fa-align-left"></i>
+                                <p id="detailsDescription"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" id="deleteEventBtn">Delete</button>
+                        <button class="btn btn-primary" id="editEventBtn">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const calendarScript = document.createElement('script');
+            calendarScript.src = '../scripts/calendar.js';
+            document.body.appendChild(calendarScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

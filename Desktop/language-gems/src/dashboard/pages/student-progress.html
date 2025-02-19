@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Progress - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn/" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading student progress...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item active" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Student Progress</h2>
+                <div class="section-actions">
+                    <div class="search-filter">
+                        <div class="filter-group">
+                            <select class="filter-select" id="class-filter">
+                                <option value="all">All Classes</option>
+                                <option value="beginner">Beginner Spanish</option>
+                                <option value="intermediate">Intermediate Spanish</option>
+                                <option value="advanced">Advanced Spanish</option>
+                            </select>
+                            <select class="filter-select" id="progress-filter">
+                                <option value="all">All Progress</option>
+                                <option value="excelling">Excelling</option>
+                                <option value="on-track">On Track</option>
+                                <option value="at-risk">Needs Attention</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Students</h3>
+                        <p class="stat-number">127</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12% this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Average Progress</h3>
+                        <p class="stat-number">78%</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +8% this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>At Risk</h3>
+                        <p class="stat-number">12</p>
+                        <span class="stat-trend negative">
+                            <i class="fas fa-arrow-up"></i>
+                            +3 this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Excelling</h3>
+                        <p class="stat-number">45</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +5 this week
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <div class="card-header">
+                        <h3>Class Progress Overview</h3>
+                        <div class="card-actions">
+                            <button class="btn-chip active">Week</button>
+                            <button class="btn-chip">Month</button>
+                            <button class="btn-chip">Year</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="classProgressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="card-header">
+                        <h3>Skill Distribution</h3>
+                        <button class="btn-icon" aria-label="More options">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="skillDistributionChart"></canvas>
+                    </div>
+                    <div class="skill-legend">
+                        <div class="skill-item">
+                            <span class="skill-dot speaking"></span>
+                            <span class="skill-label">Speaking</span>
+                            <span class="skill-value">82%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-dot writing"></span>
+                            <span class="skill-label">Writing</span>
+                            <span class="skill-value">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-dot listening"></span>
+                            <span class="skill-label">Listening</span>
+                            <span class="skill-value">88%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-dot reading"></span>
+                            <span class="skill-label">Reading</span>
+                            <span class="skill-value">79%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-progress-table">
+                <div class="table-header">
+                    <h3>Student Progress Details</h3>
+                    <div class="table-actions">
+                        <button class="btn-icon" aria-label="Filter">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Sort">
+                            <i class="fas fa-sort"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Overall Progress</th>
+                                <th>Recent Activity</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="student-avatar">
+                                            <span>MG</span>
+                                        </div>
+                                        <div class="student-info">
+                                            <p class="student-name">Maria Garcia</p>
+                                            <p class="student-email">m.garcia@email.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Advanced Spanish</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 98%;">98%</div>
+                                    </div>
+                                </td>
+                                <td>Completed "Advanced Verbs" quiz</td>
+                                <td><span class="status-badge excelling">Excelling</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" aria-label="View details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="Message student">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="More options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="student-avatar">
+                                            <span>JS</span>
+                                        </div>
+                                        <div class="student-info">
+                                            <p class="student-name">John Smith</p>
+                                            <p class="student-email">j.smith@email.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Intermediate Spanish</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 76%;">76%</div>
+                                    </div>
+                                </td>
+                                <td>Started "Grammar Basics" lesson</td>
+                                <td><span class="status-badge on-track">On Track</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" aria-label="View details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="Message student">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="More options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="student-avatar">
+                                            <span>AL</span>
+                                        </div>
+                                        <div class="student-info">
+                                            <p class="student-name">Ana Lopez</p>
+                                            <p class="student-email">a.lopez@email.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Beginner Spanish</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress warning" style="width: 45%;">45%</div>
+                                    </div>
+                                </td>
+                                <td>Missed "Basic Vocabulary" quiz</td>
+                                <td><span class="status-badge at-risk">Needs Attention</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" aria-label="View details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="Message student">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button class="btn-icon" aria-label="More options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="pagination">
+                        <button class="btn-icon" aria-label="Previous page">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="page-info">Page 1 of 5</span>
+                        <button class="btn-icon" aria-label="Next page">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="page-size">
+                        <select>
+                            <option value="10">10 per page</option>
+                            <option value="25">25 per page</option>
+                            <option value="50">50 per page</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/student-progress.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

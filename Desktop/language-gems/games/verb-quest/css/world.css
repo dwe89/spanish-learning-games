@@ -1,0 +1,506 @@
+/* World Map */
+.world-map {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../assets/backgrounds/world_map.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+/* Region Nodes */
+.region-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    transform: translate(-50%, -50%); /* Center the node on its position */
+}
+
+.region-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #ffd700;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.region-node:hover .region-circle {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #ff9900;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.region-number {
+    font-size: 1.2em;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.region-name {
+    font-size: 1.2em;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.region-status {
+    font-size: 0.9em;
+    color: #ff4d4d;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    margin-top: 5px;
+}
+
+/* Node States */
+.region-node.locked .region-circle {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: #666;
+    box-shadow: none;
+}
+
+.region-node.locked .region-number {
+    color: #888;
+}
+
+.region-node.locked:hover .region-circle {
+    transform: none;
+    background: rgba(0, 0, 0, 0.5);
+    border-color: #666;
+    box-shadow: none;
+}
+
+.region-node.completed .region-circle {
+    border-color: #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+.region-node.completed .region-number {
+    color: #4CAF50;
+}
+
+/* Region Connections */
+.region-connection {
+    position: absolute;
+    height: 4px;
+    background: linear-gradient(to right, #ffd700, #ff9900);
+    transform-origin: 0 50%;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.region-connection.locked {
+    background: linear-gradient(to right, #666, #444);
+    box-shadow: none;
+}
+
+.region-connection.completed {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+/* Region Info */
+.region-info {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    width: 300px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1100;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.region-node:hover .region-info {
+    opacity: 1;
+}
+
+.region-info h3 {
+    color: #ffd700;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.region-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.region-info .required-level {
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+@keyframes pulseNode {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* World Levels */
+.world-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 300px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+}
+
+.world-level {
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.world-level:hover:not(.locked) {
+    transform: translateX(10px);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.world-level.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #ff9900;
+}
+
+.world-level.completed {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.world-level.locked {
+    cursor: not-allowed;
+    opacity: 0.7;
+    background: rgba(128, 128, 128, 0.2);
+    border-color: #666;
+}
+
+.level-name {
+    font-size: 1.2em;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.level-description {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.locked .level-name {
+    color: #888;
+}
+
+.locked .level-description {
+    color: #666;
+}
+
+/* Exploration Screen */
+.exploration-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.exploration-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.region-title {
+    color: #ffd700;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.character-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.character-stats {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.character-stats span {
+    margin-right: 15px;
+}
+
+.character-stats .health {
+    color: #ff4d4d;
+}
+
+.character-stats .level {
+    color: #4CAF50;
+}
+
+.character-stats .xp {
+    color: #2196F3;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #4a4a4a, #2a2a2a);
+    color: white;
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.action-btn:hover {
+    background: linear-gradient(45deg, #ffd700, #ff9900);
+    color: black;
+    transform: scale(1.05);
+}
+
+.action-btn:disabled {
+    background: #333;
+    border-color: #666;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Area Selection */
+.area-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.area-btn {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.area-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.area-btn h3 {
+    color: #ffd700;
+    margin: 0 0 10px 0;
+}
+
+.area-btn p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.area-btn .difficulty {
+    color: #ff9900;
+    font-weight: bold;
+}
+
+/* Recommended Areas */
+.recommended-area {
+    border-color: #4CAF50;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(76, 175, 80, 0.1));
+}
+
+.recommended-area h3 {
+    color: #4CAF50;
+}
+
+.recommended-area:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(76, 175, 80, 0.2));
+}
+
+/* NPC Markers */
+.npc-marker {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 215, 0, 0.3);
+    border: 2px solid #ffd700;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulseMarker 2s infinite;
+}
+
+.npc-marker:hover {
+    transform: scale(1.1);
+    background: rgba(255, 215, 0, 0.4);
+}
+
+.npc-marker.quest-available {
+    background: rgba(33, 150, 243, 0.3);
+    border-color: #2196F3;
+}
+
+.npc-marker.quest-complete {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: #4CAF50;
+}
+
+/* Animations */
+@keyframes pulseMarker {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.game-controls button {
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.game-controls button:hover {
+    background: var(--accent-color);
+    color: black;
+    transform: scale(1.05);
+}
+
+.exploring-screen {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 80px auto 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+.exploring-screen h2 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.exploring-screen p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.exploration-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;  /* Changed from 0 to 50% */
+    left: 50%;  /* Changed from 0 to 50% */
+    transform: translate(-50%, -50%);  /* Added to center the modal */
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.exploration-actions button {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #4a4a4a, #2a2a2a);
+    color: white;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    z-index: 1001;
+}
+
+.exploration-actions button:hover {
+    background: linear-gradient(45deg, #ffd700, #ff9900);
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.exploration-actions button:active {
+    transform: scale(0.98);
+}
+
+/* New modal container */
+.exploration-modal {
+    position: relative;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid var(--accent-color);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#gameScreen {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important;
+}

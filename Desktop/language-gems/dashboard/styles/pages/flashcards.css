@@ -1,0 +1,241 @@
+/* Flashcards Layout */
+.flashcards-container {
+    padding: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Flashcards Header */
+.flashcards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.flashcards-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Deck Selection */
+.deck-selection {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.deck-card {
+    flex: 1;
+    min-width: 200px;
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.deck-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.deck-card.active {
+    border: 2px solid var(--primary);
+}
+
+.deck-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.deck-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.deck-stats {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Flashcard Stage */
+.flashcard-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+/* Flashcard */
+.flashcard {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16/10;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
+
+.flashcard-content {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+/* Controls */
+.flashcard-controls {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.control-btn i {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+}
+
+/* Progress */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Study Summary */
+.study-summary {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+}
+
+.summary-header {
+    margin-bottom: var(--space-lg);
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] .deck-card,
+[data-theme="dark"] .flashcard-front,
+[data-theme="dark"] .flashcard-back,
+[data-theme="dark"] .control-btn,
+[data-theme="dark"] .study-summary {
+    background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .deck-card.active {
+    border-color: var(--primary-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flashcards-container {
+        padding: var(--space-md);
+    }
+
+    .flashcards-header {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+
+    .deck-selection {
+        flex-direction: column;
+    }
+
+    .deck-card {
+        width: 100%;
+    }
+
+    .flashcard {
+        aspect-ratio: 3/4;
+    }
+
+    .flashcard-content {
+        font-size: var(--font-size-lg);
+    }
+} 

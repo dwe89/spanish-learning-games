@@ -1,0 +1,131 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <link rel="stylesheet" href="styles.css">  
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <title>Word Scramble Challenge</title>  
+</head>  
+<body>
+    <!-- Navigation will be injected here -->
+    <script type="module">
+        import { injectNavigation } from './../components/navigation.js';
+        injectNavigation();
+    </script>
+
+    <div class="game-container">  
+      <div class="nav-header">
+         <a href="../index.html" class="home-btn">🏠 Home</a>
+         <h1 class="title">Word Scramble Challenge</h1>
+      </div>
+      <div class="word-container">  
+        <h2 id="scrambledWord"></h2>  
+        <div id="letterTiles" class="letter-tiles"></div>
+      </div>  
+      <div class="input-container">  
+        <input type="text" id="answerInput" placeholder="Type your answer..." autocomplete="off" />  
+        <div class="button-group">
+            <button id="submitBtn" class="btn"><i class="fas fa-check"></i> Submit</button>
+            <button id="skipBtn" class="btn"><i class="fas fa-forward"></i> Skip</button>
+        </div>
+      </div>  
+      <div class="scoreboard">  
+        <div class="score-item">
+            <span class="score-label">SCORE</span>
+            <span id="score" class="score-value">0</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">GUESSES</span>
+            <span id="guesses" class="score-value">5</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">TIME</span>
+            <span id="time" class="score-value">60</span>
+        </div>
+      </div>  
+      <div class="button-controls">
+        <a href="../index.html" class="btn"><i class="fas fa-home"></i> Home</a>
+        <button id="restartBtn" class="btn"><i class="fas fa-redo"></i> Restart</button>
+        <button id="hintBtn" class="btn"><i class="fas fa-lightbulb"></i> Hint</button>
+        <button id="statsBtn" class="btn"><i class="fas fa-chart-bar"></i> Stats</button>
+        <button id="leaderboardBtn" class="btn"><i class="fas fa-trophy"></i> Leaderboard</button>
+        <button id="teacherModeBtn" class="btn"><i class="fas fa-chalkboard-teacher"></i> Teacher Mode</button>
+        <button id="chooseWordBtn" class="btn"><i class="fas fa-keyboard"></i> Choose Word</button>
+        <button id="toggleWordSourceBtn" class="btn">
+            <i class="fas fa-exchange-alt"></i> Use Custom Words
+        </button>
+      </div>
+      <div id="confettiContainer" class="confetti-container"></div>
+   </div>  
+   <!-- Modals -->
+   <div id="hintModal" class="modal" role="dialog" aria-labelledby="hintTitle">
+      <div class="modal-content">
+         <h2 id="hintTitle"><i class="fas fa-lightbulb"></i> Hint</h2>
+         <p id="hintText"></p>
+         <button id="closeHintBtn" class="btn">Close</button>
+      </div>
+   </div>
+
+   <div id="statsModal" class="modal" role="dialog" aria-labelledby="statsTitle">
+      <div class="modal-content">
+         <h2 id="statsTitle"><i class="fas fa-chart-bar"></i> Statistics</h2>
+         <div id="statsText"></div>
+         <button id="closeStatsBtn" class="btn">Close</button>
+      </div>
+   </div>
+
+   <div id="leaderboardModal" class="modal" role="dialog" aria-labelledby="leaderboardTitle">
+      <div class="modal-content">
+         <h2 id="leaderboardTitle"><i class="fas fa-trophy"></i> Leaderboard</h2>
+         <div id="leaderboardText"></div>
+         <button id="closeLeaderboardBtn" class="btn">Close</button>
+      </div>
+   </div>
+
+   <div id="teacherModal" class="modal" role="dialog" aria-labelledby="teacherTitle">
+      <div class="modal-content">
+         <h2 id="teacherTitle"><i class="fas fa-chalkboard-teacher"></i> Teacher Mode</h2>
+         <div id="teacherControls" class="teacher-section">
+            <h3>Add Custom Words</h3>
+            <div class="word-input-group">
+               <input type="text" id="customWord" placeholder="Enter word" />
+               <input type="text" id="customHint" placeholder="Enter hint" />
+               <button id="addWordBtn" class="btn">Add Word</button>
+            </div>
+            <div id="wordList" class="custom-word-list"></div>
+            <button id="closeTeacherBtn" class="btn">Close</button>
+         </div>
+      </div>
+   </div>
+
+   <div id="wordChoiceModal" class="modal" role="dialog" aria-labelledby="wordChoiceTitle">
+      <div class="modal-content">
+         <h2 id="wordChoiceTitle"><i class="fas fa-keyboard"></i> Choose Word</h2>
+         <div class="word-input-group">
+            <input type="text" id="wordInput" placeholder="Enter your custom word" />
+            <button id="saveWordBtn" class="btn">Save Word</button>
+         </div>
+         <button id="closeWordChoiceBtn" class="btn">Close</button>
+      </div>
+   </div>
+
+   <div id="congratsModal" class="congrats-modal">
+      <h2>Congratulations!</h2>
+      <p>You got it right!</p>
+      <button id="closeCongratsBtn" class="btn">Continue</button>
+   </div>
+
+   <div id="gameOverModal" class="modal" role="dialog" aria-labelledby="gameOverTitle">
+      <div class="modal-content">
+         <h2 id="gameOverTitle"><i class="fas fa-times-circle"></i> Game Over!</h2>
+         <p>Final Score: <span id="finalScore">0</span></p>
+         <button id="playAgainBtn" class="btn">Play Again</button>
+      </div>
+   </div>
+
+   <script src="script.js"></script>  
+
+</body>  
+</html>

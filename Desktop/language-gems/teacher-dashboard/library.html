@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learnlass="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading library...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item active" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Resource Library</h2>
+                <div class="section-actions">
+                    <div class="filter-group">
+                        <select class="filter-select" id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="documents">Documents</option>
+                            <option value="presentations">Presentations</option>
+                            <option value="worksheets">Worksheets</option>
+                            <option value="audio">Audio</option>
+                            <option value="video">Video</option>
+                        </select>
+                        <select class="filter-select" id="topic-filter">
+                            <option value="all">All Topics</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="vocabulary">Vocabulary</option>
+                            <option value="conversation">Conversation</option>
+                            <option value="culture">Culture</option>
+                        </select>
+                        <select class="filter-select" id="level-filter">
+                            <option value="all">All Levels</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Add Resource
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Resources</h3>
+                        <p class="stat-number">256</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12 this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Downloads</h3>
+                        <p class="stat-number">1.8k</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +15% this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Shares</h3>
+                        <p class="stat-number">324</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +8% this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Avg Rating</h3>
+                        <p class="stat-number">4.7</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +0.2 this month
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="library-grid">
+                <div class="library-card">
+                    <div class="library-preview">
+                        <img src="../assets/verb-conjugation-guide.jpg" alt="Verb Conjugation Guide Preview">
+                        <div class="library-type document">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF</span>
+                        </div>
+                    </div>
+                    <div class="library-content">
+                        <h3>Spanish Verb Conjugation Guide</h3>
+                        <div class="library-meta">
+                            <span class="library-topic">Grammar</span>
+                            <span class="library-level">All Levels</span>
+                            <span class="library-size">2.4 MB</span>
+                        </div>
+                        <p class="library-description">
+                            Comprehensive guide to Spanish verb conjugations with examples and practice exercises.
+                        </p>
+                        <div class="library-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>245 downloads</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="library-footer">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="library-preview">
+                        <img src="../assets/conversation-scenarios.jpg" alt="Conversation Scenarios Preview">
+                        <div class="library-type presentation">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <span>PPT</span>
+                        </div>
+                    </div>
+                    <div class="library-content">
+                        <h3>Daily Conversation Scenarios</h3>
+                        <div class="library-meta">
+                            <span class="library-topic">Conversation</span>
+                            <span class="library-level">Intermediate</span>
+                            <span class="library-size">5.8 MB</span>
+                        </div>
+                        <p class="library-description">
+                            Interactive presentation with common conversation scenarios and role-play activities.
+                        </p>
+                        <div class="library-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>182 downloads</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="library-footer">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="library-preview">
+                        <img src="../assets/pronunciation-audio.jpg" alt="Pronunciation Audio Preview">
+                        <div class="library-type audio">
+                            <i class="fas fa-file-audio"></i>
+                            <span>MP3</span>
+                        </div>
+                    </div>
+                    <div class="library-content">
+                        <h3>Spanish Pronunciation Guide</h3>
+                        <div class="library-meta">
+                            <span class="library-topic">Pronunciation</span>
+                            <span class="library-level">Beginner</span>
+                            <span class="library-size">18.5 MB</span>
+                        </div>
+                        <p class="library-description">
+                            Audio guide with native speaker pronunciations and practice exercises.
+                        </p>
+                        <div class="library-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>156 downloads</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="library-footer">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-uploads">
+                <div class="section-header">
+                    <h3>Recent Uploads</h3>
+                    <button class="btn-text">View All</button>
+                </div>
+                <div class="uploads-list">
+                    <div class="upload-item">
+                        <div class="upload-icon document">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="upload-content">
+                            <div class="upload-info">
+                                <h4>Spanish Grammar Worksheet</h4>
+                                <p class="upload-meta">
+                                    <span>PDF</span>
+                                    <span>•</span>
+                                    <span>1.2 MB</span>
+                                    <span>•</span>
+                                    <span>2 hours ago</span>
+                                </p>
+                            </div>
+                            <div class="upload-actions">
+                                <button class="btn-icon" aria-label="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" aria-label="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-item">
+                        <div class="upload-icon video">
+                            <i class="fas fa-file-video"></i>
+                        </div>
+                        <div class="upload-content">
+                            <div class="upload-info">
+                                <h4>Cultural Traditions Video</h4>
+                                <p class="upload-meta">
+                                    <span>MP4</span>
+                                    <span>•</span>
+                                    <span>45.8 MB</span>
+                                    <span>•</span>
+                                    <span>5 hours ago</span>
+                                </p>
+                            </div>
+                            <div class="upload-actions">
+                                <button class="btn-icon" aria-label="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" aria-label="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-item">
+                        <div class="upload-icon presentation">
+                            <i class="fas fa-file-powerpoint"></i>
+                        </div>
+                        <div class="upload-content">
+                            <div class="upload-info">
+                                <h4>Vocabulary Flashcards</h4>
+                                <p class="upload-meta">
+                                    <span>PPT</span>
+                                    <span>•</span>
+                                    <span>3.5 MB</span>
+                                    <span>•</span>
+                                    <span>1 day ago</span>
+                                </p>
+                            </div>
+                            <div class="upload-actions">
+                                <button class="btn-icon" aria-label="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" aria-label="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/library.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

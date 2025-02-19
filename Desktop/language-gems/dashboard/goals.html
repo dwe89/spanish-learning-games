@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Goals - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/goals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+    <style>
+        .goals-container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .goal-form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eef2f7;
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .goals-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .goal-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .goal-type {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .goal-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .goal-status.active {
+            background: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+        }
+
+        .goal-status.completed {
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+        }
+
+        .goal-progress {
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f0f3f6;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            transition: width 0.3s ease;
+        }
+
+        .goal-details {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .goal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .goal-actions button {
+            padding: 8px;
+            border: none;
+            background: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .goal-actions button:hover {
+            color: #2c3e50;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            color: #7f8c8d;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #bdc3c7;
+        }
+
+        .empty-state p {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="goals-container">
+                <div class="goals-header">
+                    <h2>Learning Goals</h2>
+                    <button class="btn btn-primary" id="createGoalBtn">
+                        <i class="fas fa-plus"></i> Create New Goal
+                    </button>
+                </div>
+
+                <div class="goals-overview">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Active Goals</h3>
+                            <p class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Completed Goals</h3>
+                            <p class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Weekly Streak</h3>
+                            <p class="stat-number">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goals-content">
+                    <div class="goals-filters">
+                        <button class="filter-btn active" data-filter="active">Active</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                        <button class="filter-btn" data-filter="all">All Goals</button>
+                    </div>
+
+                    <div class="goals-list">
+                        <!-- Goals will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Goal Modal -->
+            <div class="modal" id="createGoalModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Create New Goal</h3>
+                        <button class="close-btn">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createGoalForm">
+                            <div class="form-group">
+                                <label for="goalTitle">Goal Title</label>
+                                <input type="text" id="goalTitle" required placeholder="Enter your goal">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goalType">Goal Type</label>
+                                <select id="goalType" required>
+                                    <option value="daily">Daily Goal</option>
+                                    <option value="weekly">Weekly Goal</option>
+                                    <option value="monthly">Monthly Goal</option>
+                                    <option value="custom">Custom Timeline</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goalCategory">Category</label>
+                                <select id="goalCategory" required>
+                                    <option value="vocabulary">Vocabulary</option>
+                                    <option value="grammar">Grammar</option>
+                                    <option value="speaking">Speaking</option>
+                                    <option value="listening">Listening</option>
+                                    <option value="reading">Reading</option>
+                                    <option value="writing">Writing</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goalTarget">Target</label>
+                                <input type="number" id="goalTarget" required min="1" placeholder="Enter target value">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goalDeadline">Deadline</label>
+                                <input type="date" id="goalDeadline" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goalReminders">Reminders</label>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="reminders" value="email"> Email
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="reminders" value="push"> Push Notifications
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelGoalBtn">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Create Goal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const goalsScript = document.createElement('script');
+            goalsScript.src = '../scripts/goals.js';
+            document.body.appendChild(goalsScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

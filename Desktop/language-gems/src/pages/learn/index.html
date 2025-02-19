@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your language learning path - Spanish or French">
+    <title>Choose Your Language - Language Gems</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../styles/menu.css">
+    <link rel="stylesheet" href="../../styles/learn.css">
+    <script src="../../scripts/load-menu.js" defer></script>
+    <style>
+        .language-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+
+        .language-image.spanish-bg {
+            background-image: url('../../images/spanish-flag.jpg');
+        }
+
+        .language-image.french-bg {
+            background-image: url('../../images/french-flag.jpg');
+        }
+
+        .language-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            mix-blend-mode: multiply;
+        }
+
+        .language-card:hover .language-overlay {
+            background: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="learn-page">
+    <div id="menu-container"></div>
+    <main class="main-content">
+        <div class="container">
+            <header class="header">
+                <h1 class="title">Choose Your Language</h1>
+                <p class="subtitle">Select a language to begin your learning journey</p>
+            </header>
+
+            <div class="language-selection">
+                <a href="spanish/index.html" class="language-card">
+                    <div class="language-image spanish-bg">
+                        <div class="language-overlay"></div>
+                    </div>
+                    <div class="language-info">
+                        <h2>Spanish</h2>
+                        <p>Learn one of the world's most spoken languages</p>
+                        <div class="language-stats">
+                            <div class="stat">
+                                <span class="stat-value">500M+</span>
+                                <span class="stat-label">Speakers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">21</span>
+                                <span class="stat-label">Countries</span>
+                            </div>
+                        </div>
+                        <div class="start-button">Start Learning Spanish →</div>
+                    </div>
+                </a>
+
+                <a href="french/index.html" class="language-card">
+                    <div class="language-image french-bg">
+                        <div class="language-overlay"></div>
+                    </div>
+                    <div class="language-info">
+                        <h2>French</h2>
+                        <p>Master the language of culture and diplomacy</p>
+                        <div class="language-stats">
+                            <div class="stat">
+                                <span class="stat-value">300M+</span>
+                                <span class="stat-label">Speakers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">29</span>
+                                <span class="stat-label">Countries</span>
+                            </div>
+                        </div>
+                        <div class="start-button">Start Learning French →</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

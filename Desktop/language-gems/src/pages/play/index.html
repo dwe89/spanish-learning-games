@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play - Language Gems</title>
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles/theme.css">
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/play.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="menu-container"></div>
+
+    <main class="main-content">
+        <div class="play-container">
+            <header class="play-header">
+                <h1>Unlock Your Potential</h1>
+                <p>Discover fun and effective ways to learn and grow</p>
+            </header>
+
+            <div class="choice-grid">
+                <a href="/play/games/index.html" class="choice-card">
+                    <div class="choice-image" style="background-image: url('../assets/images/games-bg.jpg')">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2>Interactive Games</h2>
+                        <p>Master languages through engaging challenges</p>
+                        <ul class="feature-list">
+                            <li>Fun and interactive quizzes</li>
+                            <li>Real-time progress tracking</li>
+                            <li>Multiplayer options</li>
+                        </ul>
+                        <div class="cta-button">
+                            <span>Start Gaming</span>
+                            <div class="arrow-icon">➔</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/play/songs/index.html" class="choice-card">
+                    <div class="choice-image" style="background-image: url('../assets/images/music-bg.jpg')">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h2>Musical Learning</h2>
+                        <p>Absorb language through rhythm and melody</p>
+                        <ul class="feature-list">
+                            <li>Curated playlists for learning</li>
+                            <li>Lyric analysis and translation</li>
+                            <li>Interactive karaoke</li>
+                        </ul>
+                        <div class="cta-button">
+                            <span>Explore Music</span>
+                            <div class="arrow-icon">➔</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/load-menu.js"></script>
+</body>
+</html>

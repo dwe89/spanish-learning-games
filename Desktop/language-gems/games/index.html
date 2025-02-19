@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Games</title>
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../styles.css">
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../styles/menu.css">
+    <link rel="stylesheet" href="../../styles/play.css">
+    <link rel="stylesheet" href="../../styles/auth-modal.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../scripts/load-menu.js" defer></script>
+</head>
+<body>
+    <div id="menu-container"></div>
+
+    <main class="main-content">
+        <div class="play-container">
+            <header class="play-header">
+                <h1>Play & Learn</h1>
+                <p>Master languages through fun and engaging games</p>
+            </header>
+
+            <div class="games-grid">
+                <div class="game-item">
+                    <a href="hangman/index.html" class="game-card">
+                        <div class="game-icon">🎯</div>
+                        <h3>Hangman</h3>
+                        <p>Choose the correct letters</p>
+                    </a>
+                </div>
+                
+                <div class="game-item">
+                    <a href="fruit-game/index.html" class="game-card">
+                        <div class="game-icon">🎯</div>
+                        <h3>Word Match</h3>
+                        <p>Match words with their translations</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="emoji-game/index.html" class="game-card">
+                        <div class="game-icon">😀</div>
+                        <h3>Emoji Match</h3>
+                        <p>Learn words with emoji associations</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="sentence-builder/index.html" class="game-card">
+                        <div class="game-icon">📝</div>
+                        <h3>Sentence Builder</h3>
+                        <p>Create correct sentences from words</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="verb-quest/index.html" class="game-card">
+                        <div class="game-icon">⚔️</div>
+                        <h3>Verb Quest</h3>
+                        <p>Practice verb conjugations</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="fill-lyrics/index.html" class="game-card">
+                        <div class="game-icon">🎵</div>
+                        <h3>Fill the Lyrics</h3>
+                        <p>Complete song lyrics while listening</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="rhythm-game/index.html" class="game-card">
+                        <div class="game-icon">🎮</div>
+                        <h3>Rhythm Master</h3>
+                        <p>Learn pronunciation with rhythm</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="memory-game/index.html" class="game-card">
+                        <div class="game-icon">🧠</div>
+                        <h3>Memory Match</h3>
+                        <p>Find matching pairs of words</p>
+                    </a>
+                </div>
+
+                <div class="game-item">
+                    <a href="word-scramble/index.html" class="game-card">
+                        <div class="game-icon">🔤</div>
+                        <h3>Word Scramble</h3>
+                        <p>Unscramble words against time</p>
+                    </a>
+                </div>
+            </div>
+
+            <section class="achievements-preview">
+                <h2>Recent Achievements</h2>
+                <div id="recentAchievements" class="achievements-list">
+                    <!-- Achievements will be populated dynamically -->
+                    <p class="empty-state">Play games to earn achievements!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../../scripts/achievement-system.js"></script>
+    <script src="../../scripts/game-state.js"></script>
+</body>
+</html>

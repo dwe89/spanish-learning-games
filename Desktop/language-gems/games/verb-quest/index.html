@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="stylesheet" href="css/world.css">
+    <link rel="stylesheet" href="css/battle.css">
+    <link rel="stylesheet" href="css/ui.css">
+    <title>Conjugaria - Spanish RPG</title>
+
+    <!-- Add Howler.js for better audio handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+
+    <!-- First load data -->
+    <script src="js/data/enemies.js" type="module"></script>
+    <script src="js/data/regions.js" type="module"></script>
+    <script src="js/data/verbs.js" type="module"></script>
+
+    <!-- Then load core systems -->
+    <script src="js/animations.js" type="module"></script>
+    <script src="js/audio.js" type="module"></script>
+    <script src="js/particles.js" type="module"></script>
+
+    <!-- Then load game components -->
+    <script src="js/enemy.js" type="module"></script>
+    <script src="js/character.js" type="module"></script>
+    <script src="js/battle.js" type="module"></script>
+    <script src="js/WorldMap.js" type="module"></script>
+    <script src="js/menu.js" type="module"></script>
+    <script src="js/tutorial.js" type="module"></script>
+
+    <!-- Load main game last -->
+    <script src="js/game.js" type="module"></script>
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    <script type="module">
+        // Remove these lines since they're causing a 404
+        // import { injectNavigation } from './../components/navigation.js';
+        // injectNavigation();
+    </script>
+
+    <div class="game-container">
+        <nav class="game-nav">
+            <a href="../index.html" class="home-btn">← Back to Games</a>
+            <div class="player-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Level:</span>
+                    <span id="playerLevel">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HP:</span>
+                    <span id="playerHealth">100/100</span>
+                </div>
+                <div class="stat-item">
+                    <div class="xp-bar">
+                        <div class="xp-bar-fill"></div>
+                    </div>
+                    <span class="stat-label">XP:</span>
+                    <span id="playerXP">0/100</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Skill Points:</span>
+                    <span id="skillPoints">0</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="questLogBtn" onclick="window.game.toggleQuestLog()">Quest Log</button>
+                <button id="inventoryBtn" onclick="window.game.toggleInventory()">Inventory</button>
+                <button id="settingsBtn" onclick="window.game.toggleSettings()">Settings</button>
+                <button id="soundToggleBtn">🔊</button>
+            </div>
+            <button id="mapBtn" class="menu-btn">🗺️</button>
+            <button id="fullscreenBtn" class="fullscreen-btn">⛶</button>
+        </nav>
+
+        <div id="gameScreen" class="game-screen">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Character Creation Overlay -->
+    <div id="characterCreation" class="character-creation-overlay">
+        <div class="character-creation-content">
+            <h2>Create Your Character</h2>
+            <form id="characterForm">
+                <div class="form-group">
+                    <label for="characterName">Character Name:</label>
+                    <input type="text" id="characterName" required>
+                </div>
+                <input type="hidden" id="characterClass" value="">
+                <div class="class-selection">
+                    <div class="class-option" onclick="document.getElementById('characterClass').value='warrior'">
+                        <h3>Warrior</h3>
+                        <p>Strong and resilient. Extra health and damage.</p>
+                    </div>
+                    <div class="class-option" onclick="document.getElementById('characterClass').value='mage'">
+                        <h3>Mage</h3>
+                        <p>Wise and patient. More time to answer.</p>
+                    </div>
+                    <div class="class-option" onclick="document.getElementById('characterClass').value='rogue'">
+                        <h3>Rogue</h3>
+                        <p>Quick and precise. Better combo bonuses.</p>
+                    </div>
+                </div>
+                <button type="submit" id="beginAdventure">Begin Adventure</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add confetti library before other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script type="module">
+        import { Game } from './js/game.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                window.game = new Game();
+                game.startAutoSave();
+            } catch (error) {
+                console.error('Game initialization error:', error);
+            }
+        });
+    </script>
+
+</body>
+</html>

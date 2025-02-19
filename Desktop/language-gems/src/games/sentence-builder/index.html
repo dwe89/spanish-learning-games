@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sentence Builder - Spanish Learning</title>
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    <script type="module">
+        import { injectNavigation } from './../components/navigation.js';
+        injectNavigation();
+    </script>
+
+    <div class="game-wrapper">
+        <div class="header">
+            <a href="../index.html" class="home-btn">← Back to Games</a>
+            <h1 class="title">Sentence Builder</h1>
+        </div>
+
+        <!-- Sentence Input Section -->
+        <div class="sentence-input-section" id="sentenceInputSection">
+            <h2>Create Your Sentences</h2>
+            <div class="sentence-inputs">
+                <textarea id="sentenceInput" placeholder="Enter sentences (one per line)"></textarea>
+                <button id="addSentences" class="btn">Add Sentences</button>
+            </div>
+            <div class="sentence-list" id="sentenceList"></div>
+            <button id="startGame" class="btn" disabled>Start Game</button>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board" id="gameBoard" style="display: none;">
+            <div class="stats-bar">
+                <div class="stat-item">Time: <span id="time">0</span>s</div>
+                <div class="stat-item">Sentences Completed: <span id="sentenceCount">0</span></div>
+                <div class="stat-item">Attempts: <span id="attempts">0</span></div>
+            </div>
+            <div class="sentence-grid" id="sentenceGrid"></div>
+            <button id="resetGame" class="btn">Reset Game</button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard" id="leaderboard" style="display: none;">
+            <h2>Leaderboard</h2>
+            <div class="leaderboard-list" id="leaderboardList"></div>
+        </div>
+
+        <!-- Completion Celebration -->
+        <div id="celebration" class="completion-celebration" style="display: none;">
+            <h2>¡Felicitaciones!</h2>
+            <p>You've completed all the sentences!</p>
+            <button onclick="location.reload()">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Add audio elements with correct paths -->
+    <audio id="clickSound" src="./assets/sounds/click.mp3" preload="auto"></audio>
+    <audio id="dropSound" src="./assets/sounds/drop.mp3" preload="auto"></audio>
+    <audio id="winSound" src="./assets/sounds/win.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

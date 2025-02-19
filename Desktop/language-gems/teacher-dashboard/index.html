@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading dashboard...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item active" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Dashboard Overview</h2>
+                <div class="date-range">
+                    <button class="date-button">
+                        <i class="fas fa-calendar"></i>
+                        This Week
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Students</h3>
+                        <p class="stat-number">127</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12% this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Average Study Time</h3>
+                        <p class="stat-number">47 min</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +5% this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Pending Assignments</h3>
+                        <p class="stat-number">23</p>
+                        <span class="stat-trend negative">
+                            <i class="fas fa-arrow-down"></i>
+                            -15% this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Average Progress</h3>
+                        <p class="stat-number">78%</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +8% this month
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                        <button class="btn-icon" aria-label="More options">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon completed">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-title">Assignment Completed</p>
+                                <p class="activity-desc">Maria Garcia completed "Spanish Verbs Quiz"</p>
+                                <span class="activity-time">2 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon progress">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-title">New Lesson Started</p>
+                                <p class="activity-desc">John Smith started "Advanced Conjugation"</p>
+                                <span class="activity-time">15 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon alert">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-title">Assignment Due Soon</p>
+                                <p class="activity-desc">5 students haven't started "Vocabulary Test"</p>
+                                <span class="activity-time">1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-text">View All Activity</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Class Performance</h3>
+                        <div class="card-actions">
+                            <button class="btn-chip active">Week</button>
+                            <button class="btn-chip">Month</button>
+                            <button class="btn-chip">Year</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Top Students</h3>
+                        <button class="btn-text">View All</button>
+                    </div>
+                    <div class="student-list">
+                        <div class="student-item">
+                            <div class="student-avatar">
+                                <span>MG</span>
+                            </div>
+                            <div class="student-info">
+                                <p class="student-name">Maria Garcia</p>
+                                <p class="student-progress">98% completion rate</p>
+                            </div>
+                            <div class="student-score">
+                                <span class="badge">A+</span>
+                            </div>
+                        </div>
+                        <div class="student-item">
+                            <div class="student-avatar">
+                                <span>JS</span>
+                            </div>
+                            <div class="student-info">
+                                <p class="student-name">John Smith</p>
+                                <p class="student-progress">95% completion rate</p>
+                            </div>
+                            <div class="student-score">
+                                <span class="badge">A</span>
+                            </div>
+                        </div>
+                        <div class="student-item">
+                            <div class="student-avatar">
+                                <span>AL</span>
+                            </div>
+                            <div class="student-info">
+                                <p class="student-name">Ana Lopez</p>
+                                <p class="student-progress">92% completion rate</p>
+                            </div>
+                            <div class="student-score">
+                                <span class="badge">A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Upcoming Deadlines</h3>
+                        <button class="btn-icon" aria-label="Calendar view">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                    <div class="deadline-list">
+                        <div class="deadline-item urgent">
+                            <div class="deadline-date">
+                                <span class="date">15</span>
+                                <span class="month">MAR</span>
+                            </div>
+                            <div class="deadline-content">
+                                <p class="deadline-title">Vocabulary Test</p>
+                                <p class="deadline-desc">Beginner Spanish - Class A</p>
+                            </div>
+                            <span class="deadline-badge">Tomorrow</span>
+                        </div>
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <span class="date">18</span>
+                                <span class="month">MAR</span>
+                            </div>
+                            <div class="deadline-content">
+                                <p class="deadline-title">Grammar Quiz</p>
+                                <p class="deadline-desc">Intermediate Spanish - Class B</p>
+                            </div>
+                            <span class="deadline-badge">4 days left</span>
+                        </div>
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <span class="date">22</span>
+                                <span class="month">MAR</span>
+                            </div>
+                            <div class="deadline-content">
+                                <p class="deadline-title">Speaking Assessment</p>
+                                <p class="deadline-desc">Advanced Spanish - Class C</p>
+                            </div>
+                            <span class="deadline-badge">1 week left</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/index.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

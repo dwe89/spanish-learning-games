@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/leaderboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h2>Class Leaderboard</h2>
+                    <div class="leaderboard-filters">
+                        <select id="classFilter">
+                            <option value="current">Current Class</option>
+                            <option value="all">All Classes</option>
+                        </select>
+                        <select id="timeFilter">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="semester">This Semester</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="top-performers">
+                    <div class="performer second">
+                        <div class="rank"><i class="fas fa-medal silver"></i></div>
+                        <div class="avatar">
+                            <img src="../assets/avatars/avatar2.jpg" alt="Second Place">
+                        </div>
+                        <div class="name">Maria G.</div>
+                        <div class="points">2,850 XP</div>
+                    </div>
+                    <div class="performer first">
+                        <div class="rank"><i class="fas fa-crown gold"></i></div>
+                        <div class="avatar">
+                            <img src="../assets/avatars/avatar1.jpg" alt="First Place">
+                        </div>
+                        <div class="name">Juan R.</div>
+                        <div class="points">3,200 XP</div>
+                    </div>
+                    <div class="performer third">
+                        <div class="rank"><i class="fas fa-medal bronze"></i></div>
+                        <div class="avatar">
+                            <img src="../assets/avatars/avatar3.jpg" alt="Third Place">
+                        </div>
+                        <div class="name">Carlos M.</div>
+                        <div class="points">2,600 XP</div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-categories">
+                    <div class="category-tabs">
+                        <button class="tab active" data-category="xp">XP Points</button>
+                        <button class="tab" data-category="streak">Study Streak</button>
+                        <button class="tab" data-category="vocab">Vocabulary</button>
+                        <button class="tab" data-category="quiz">Quiz Scores</button>
+                    </div>
+
+                    <div class="category-content">
+                        <div class="leaderboard-list">
+                            <div class="list-header">
+                                <span>Rank</span>
+                                <span>Student</span>
+                                <span>Progress</span>
+                                <span>Points</span>
+                            </div>
+                            <div class="list-body">
+                                <!-- Rankings will be dynamically populated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="your-position">
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3>Your Position</h3>
+                            <div class="position-stats">
+                                <div class="stat">
+                                    <span class="label">Rank</span>
+                                    <span class="value">#8</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">XP</span>
+                                    <span class="value">1,850</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">To Next Rank</span>
+                                    <span class="value">150 XP</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (await DashboardAuth.checkAuth()) {
+                document.body.style.visibility = 'visible';
+                initializeLeaderboard();
+            }
+        });
+
+        function initializeLeaderboard() {
+            const listBody = document.querySelector('.list-body');
+            const mockData = [
+                { rank: 4, name: 'Ana L.', progress: 75, points: 2400 },
+                { rank: 5, name: 'Miguel S.', progress: 70, points: 2200 },
+                { rank: 6, name: 'Laura P.', progress: 65, points: 2000 },
+                { rank: 7, name: 'David R.', progress: 60, points: 1900 },
+                { rank: 8, name: 'You', progress: 55, points: 1850, isCurrentUser: true },
+                { rank: 9, name: 'Sofia B.', progress: 50, points: 1800 },
+                { rank: 10, name: 'Pedro M.', progress: 45, points: 1700 }
+            ];
+
+            mockData.forEach(student => {
+                const row = document.createElement('div');
+                row.className = `list-row ${student.isCurrentUser ? 'current-user' : ''}`;
+                row.innerHTML = `
+                    <span class="rank">#${student.rank}</span>
+                    <span class="student">${student.name}</span>
+                    <span class="progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${student.progress}%"></div>
+                        </div>
+                    </span>
+                    <span class="points">${student.points} XP</span>
+                `;
+                listBody.appendChild(row);
+            });
+
+            // Add tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    // Here you would typically fetch and display data for the selected category
+                });
+            });
+        }
+    </script>
+</body>
+</html> 

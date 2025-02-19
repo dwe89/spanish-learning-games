@@ -1,0 +1,478 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading feedback...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item active" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Student Feedback</h2>
+                <div class="section-actions">
+                    <div class="filter-group">
+                        <select class="filter-select" id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="lesson">Lesson</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="assessment">Assessment</option>
+                            <option value="general">General</option>
+                        </select>
+                        <select class="filter-select" id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="new">New</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Request Feedback
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Feedback</h3>
+                        <p class="stat-number">156</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12 this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Avg Rating</h3>
+                        <p class="stat-number">4.8</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +0.2 this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Response Time</h3>
+                        <p class="stat-number">2.5h</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-down"></i>
+                            -30min this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Resolution Rate</h3>
+                        <p class="stat-number">95%</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +5% this month
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-grid">
+                <div class="feedback-card priority-high">
+                    <div class="feedback-header">
+                        <div class="feedback-type">
+                            <i class="fas fa-book"></i>
+                            <span>Lesson Feedback</span>
+                        </div>
+                        <div class="feedback-status new">
+                            <i class="fas fa-circle"></i>
+                            <span>New</span>
+                        </div>
+                    </div>
+                    <div class="feedback-content">
+                        <h3>Present Tense Conjugation</h3>
+                        <div class="feedback-meta">
+                            <span class="feedback-student">Maria Garcia</span>
+                            <span class="feedback-date">2 hours ago</span>
+                        </div>
+                        <div class="feedback-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>4.5</span>
+                        </div>
+                        <p class="feedback-text">
+                            The lesson was very helpful, but I would appreciate more practice exercises for irregular verbs. The examples were clear, but I need more hands-on practice.
+                        </p>
+                    </div>
+                    <div class="feedback-footer">
+                        <button class="btn-text">View Details</button>
+                        <button class="btn-primary">Respond</button>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-type">
+                            <i class="fas fa-tasks"></i>
+                            <span>Assignment Feedback</span>
+                        </div>
+                        <div class="feedback-status in-progress">
+                            <i class="fas fa-circle"></i>
+                            <span>In Progress</span>
+                        </div>
+                    </div>
+                    <div class="feedback-content">
+                        <h3>Cultural Project</h3>
+                        <div class="feedback-meta">
+                            <span class="feedback-student">John Smith</span>
+                            <span class="feedback-date">1 day ago</span>
+                        </div>
+                        <div class="feedback-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span>5.0</span>
+                        </div>
+                        <p class="feedback-text">
+                            The project guidelines were very clear and helped me understand what was expected. The research resources provided were excellent.
+                        </p>
+                    </div>
+                    <div class="feedback-footer">
+                        <button class="btn-text">View Details</button>
+                        <button class="btn-primary">Continue Discussion</button>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-type">
+                            <i class="fas fa-clipboard-check"></i>
+                            <span>Assessment Feedback</span>
+                        </div>
+                        <div class="feedback-status resolved">
+                            <i class="fas fa-circle"></i>
+                            <span>Resolved</span>
+                        </div>
+                    </div>
+                    <div class="feedback-content">
+                        <h3>Vocabulary Quiz</h3>
+                        <div class="feedback-meta">
+                            <span class="feedback-student">Ana Lopez</span>
+                            <span class="feedback-date">3 days ago</span>
+                        </div>
+                        <div class="feedback-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.0</span>
+                        </div>
+                        <p class="feedback-text">
+                            The quiz format was good, but some questions were ambiguous. Would be helpful to have more context in multiple choice options.
+                        </p>
+                    </div>
+                    <div class="feedback-footer">
+                        <button class="btn-text">View Details</button>
+                        <button class="btn-primary">View Resolution</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-trends">
+                <div class="section-header">
+                    <h3>Feedback Trends</h3>
+                    <div class="trend-filters">
+                        <button class="btn-text active">This Week</button>
+                        <button class="btn-text">This Month</button>
+                        <button class="btn-text">This Quarter</button>
+                    </div>
+                </div>
+                <div class="trends-grid">
+                    <div class="trend-card">
+                        <div class="trend-header">
+                            <h4>Common Topics</h4>
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <ul class="trend-list">
+                            <li>
+                                <span>Practice Exercises</span>
+                                <span class="trend-count">24</span>
+                            </li>
+                            <li>
+                                <span>Assignment Clarity</span>
+                                <span class="trend-count">18</span>
+                            </li>
+                            <li>
+                                <span>Quiz Format</span>
+                                <span class="trend-count">12</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="trend-card">
+                        <div class="trend-header">
+                            <h4>Rating Distribution</h4>
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="rating-bars">
+                            <div class="rating-bar">
+                                <span class="rating-label">5★</span>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 45%"></div>
+                                </div>
+                                <span class="rating-count">45%</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">4★</span>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 35%"></div>
+                                </div>
+                                <span class="rating-count">35%</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">3★</span>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 15%"></div>
+                                </div>
+                                <span class="rating-count">15%</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">2★</span>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 3%"></div>
+                                </div>
+                                <span class="rating-count">3%</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span class="rating-label">1★</span>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 2%"></div>
+                                </div>
+                                <span class="rating-count">2%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trend-card">
+                        <div class="trend-header">
+                            <h4>Response Times</h4>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="response-stats">
+                            <div class="response-stat">
+                                <div class="stat-value">80%</div>
+                                <div class="stat-label">Within 4 hours</div>
+                            </div>
+                            <div class="response-stat">
+                                <div class="stat-value">95%</div>
+                                <div class="stat-label">Within 24 hours</div>
+                            </div>
+                            <div class="response-stat">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">Within 48 hours</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/feedback.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

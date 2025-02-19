@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Language Gems</title>
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../styles/base/reset.css">
+    <link rel="stylesheet" href="../styles/base/typography.css">
+    <link rel="stylesheet" href="../styles/base/variables.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/assignments.css">
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../styles/layouts/header.css">
+    <link rel="stylesheet" href="../styles/layouts/footer.css">
+    <link rel="stylesheet" href="../styles/layouts/grid.css">
+    <link rel="stylesheet" href="../styles/layouts/containers.css">
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../styles/components/buttons.css">
+    <link rel="stylesheet" href="../styles/components/cards.css">
+    <link rel="stylesheet" href="../styles/components/forms.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Scripts -->
+    <script type="module">
+        import { DashboardAuth } from '../scripts/dashboard-auth.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            if (await DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                loadingOverlay.classList.remove('active');
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        async function loadScripts() {
+            // Create a promise for API service loading
+            const loadAPI = new Promise(resolve => {
+                const apiScript = document.createElement('script');
+                apiScript.src = '../scripts/api-service.js';
+                apiScript.type = 'module';
+                apiScript.onload = resolve;
+                document.body.appendChild(apiScript);
+            });
+
+            // Load menu and dashboard scripts in parallel after API loads
+            await loadAPI;
+            
+            const scripts = [
+                '../scripts/load-menu.js',
+                '../scripts/student-dashboard.js',
+                '../scripts/assignments.js'
+            ].map(src => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.type = 'module';
+                document.body.appendChild(script);
+                return new Promise(resolve => script.onload = resolve);
+            });
+
+            await Promise.all(scripts);
+        }
+    </script>
+</head>
+<body style="visibility: hidden;">
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar" role="navigation" aria-label="Main navigation">
+            <nav class="dashboard-nav">
+                <div class="nav-section">
+                    <h3>LEARNING</h3>
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        Overview
+                    </a>
+                    <a href="progress.html" class="nav-item">
+                        <i class="fas fa-chart-line"></i>
+                        Progress
+                    </a>
+                    <a href="achievements.html" class="nav-item">
+                        <i class="fas fa-trophy"></i>
+                        Achievements
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>STUDY</h3>
+                    <a href="lessons.html" class="nav-item">
+                        <i class="fas fa-book-open"></i>
+                        Lessons
+                    </a>
+                    <a href="assignments.html" class="nav-item active">
+                        <i class="fas fa-tasks"></i>
+                        Assignments
+                    </a>
+                    <a href="flashcards.html" class="nav-item">
+                        <i class="fas fa-clone"></i>
+                        Flashcards
+                    </a>
+                    <a href="vocabulary.html" class="nav-item">
+                        <i class="fas fa-language"></i>
+                        Vocabulary
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>RESOURCES</h3>
+                    <a href="resources.html" class="nav-item">
+                        <i class="fas fa-folder"></i>
+                        Resources
+                    </a>
+                    <a href="help.html" class="nav-item">
+                        <i class="fas fa-question-circle"></i>
+                        Help & Support
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main" id="main-content" tabindex="-1">
+            <div class="assignments-container">
+                <div class="assignments-header">
+                    <h2>Assignments</h2>
+                    <div class="filter-controls">
+                        <select class="filter-select" id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="overdue">Overdue</option>
+                        </select>
+                        <select class="filter-select" id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="vocabulary">Vocabulary</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="speaking">Speaking</option>
+                            <option value="writing">Writing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="assignments-grid" id="assignmentsList">
+                    <!-- Assignments will be loaded dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+    <link href="/core/menu.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progress Tracking - Teacher Dashboard</title>
+<link href="/styles/dashboard.css" rel="stylesheet"/>
+<link href="/styles/menu.css" rel="stylesheet"/>
+<link href="/styles/progress.css" rel="stylesheet"/>
+<script src="/core/menu-init.js" type="module">
+</script><script src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<script src="/scripts/dashboard-auth.js">
+</script>
+<script>
+        // Load scripts in correct order
+        async function loadScripts() {
+            // Load API service first
+            const apiScript = document.createElement('script');
+            apiScript.src = '/scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+            // Then load menu
+            const menuScript = document.createElement('script');
+            menuScript.src = '/scripts/load-menu.js';
+            document.body.appendChild(menuScript);
+            // Finally load progress script
+            const progressScript = document.createElement('script');
+            progressScript.src = '/scripts/progress.js';
+            document.body.appendChild(progressScript);
+        }
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</head>
+<div id="menu-container"></div>
+<div class="dashboard-container dashboard-page">
+<aside class="dashboard-sidebar">
+<nav class="dashboard-nav">
+    <div class="nav-section">
+        <h3>Analytics</h3>
+        <a class="nav-item" href="index.html">
+            <i class="fas fa-chart-line"></i> Overview
+        </a>
+        <a class="nav-item" href="student-progress.html">
+            <i class="fas fa-user-graduate"></i> Student Progress
+        </a>
+        <a class="nav-item" href="class-analytics.html">
+            <i class="fas fa-chart-pie"></i> Class Analytics
+        </a>
+        <a class="nav-item" href="reports.html">
+            <i class="fas fa-file-alt"></i> Reports
+        </a>
+    </div>
+    <div class="nav-section">
+        <h3>Management</h3>
+        <a class="nav-item" href="class-list.html">
+            <i class="fas fa-users"></i> Class Lists
+        </a>
+        <a class="nav-item" href="assignments.html">
+            <i class="fas fa-tasks"></i> Assignments
+        </a>
+        <a class="nav-item" href="resources.html">
+            <i class="fas fa-book"></i> Resources
+        </a>
+        <a class="nav-item" href="games.html">
+            <i class="fas fa-gamepad"></i> Games
+        </a>
+        <a class="nav-item" href="lessons.html">
+            <i class="fas fa-chalkboard-teacher"></i> Lesson Plans
+        </a>
+        <a class="nav-item" href="marketplace.html">
+            <i class="fas fa-store"></i> Marketplace
+        </a>
+        <a class="nav-item" href="library.html">
+            <i class="fas fa-book-open"></i> My Library
+        </a>
+    </div>
+    <div class="nav-section">
+        <h3>Communication</h3>
+        <a class="nav-item" href="messages.html">
+            <i class="fas fa-envelope"></i> Messages
+        </a>
+        <a class="nav-item" href="announcements.html">
+            <i class="fas fa-bullhorn"></i> Announcements
+        </a>
+        <a class="nav-item" href="feedback.html">
+            <i class="fas fa-comment"></i> Feedback
+        </a>
+    </div>
+    <div class="nav-section">
+        <h3>Admin</h3>
+        <a class="nav-item" href="curriculum.html">
+            <i class="fas fa-graduation-cap"></i> Curriculum
+        </a>
+        <a class="nav-item" href="assessments.html">
+            <i class="fas fa-clipboard-check"></i> Assessments
+        </a>
+        <a class="nav-item" href="settings.html">
+            <i class="fas fa-cog"></i> Settings
+        </a>
+    </div>
+</nav>
+</aside>
+<main class="dashboard-main">
+    <div class="dashboard-header">
+        <h1>Progress Tracking</h1>
+    </div>
+    <div class="dashboard-content">
+        <!-- Main content here -->
+        <div class="progress-overview">
+            <p>Track student progress and performance metrics here.</p>
+        </div>
+    </div>
+</main>
+</div>
+</body>
+</html>

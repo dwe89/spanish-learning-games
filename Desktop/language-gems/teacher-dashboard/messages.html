@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading messages...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item active" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Messages</h2>
+                <div class="section-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search messages...">
+                    </div>
+                    <button class="btn-primary">
+                        <i class="fas fa-edit"></i>
+                        New Message
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container">
+                <div class="messages-sidebar">
+                    <div class="messages-tabs">
+                        <button class="tab active">Inbox</button>
+                        <button class="tab">Sent</button>
+                        <button class="tab">Archived</button>
+                    </div>
+                    <div class="messages-list">
+                        <div class="message-item active unread">
+                            <div class="message-avatar">
+                                <span>MG</span>
+                            </div>
+                            <div class="message-preview">
+                                <div class="message-header">
+                                    <h4>Maria Garcia</h4>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                                <p class="message-subject">Question about homework</p>
+                                <p class="message-excerpt">Hi, I have a question about the verb conjugation exercise...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <span>JS</span>
+                            </div>
+                            <div class="message-preview">
+                                <div class="message-header">
+                                    <h4>John Smith</h4>
+                                    <span class="message-time">Yesterday</span>
+                                </div>
+                                <p class="message-subject">Assignment submission</p>
+                                <p class="message-excerpt">I've submitted my assignment for the cultural project...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item unread">
+                            <div class="message-avatar">
+                                <span>AL</span>
+                            </div>
+                            <div class="message-preview">
+                                <div class="message-header">
+                                    <h4>Ana Lopez</h4>
+                                    <span class="message-time">Yesterday</span>
+                                </div>
+                                <p class="message-subject">Extra practice materials</p>
+                                <p class="message-excerpt">Could you recommend some additional practice materials...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <span>RK</span>
+                            </div>
+                            <div class="message-preview">
+                                <div class="message-header">
+                                    <h4>Robert Kim</h4>
+                                    <span class="message-time">2 days ago</span>
+                                </div>
+                                <p class="message-subject">Class schedule change</p>
+                                <p class="message-excerpt">I need to reschedule my Thursday class due to...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-content">
+                    <div class="message-thread">
+                        <div class="message-header">
+                            <div class="thread-info">
+                                <h3>Question about homework</h3>
+                                <div class="thread-meta">
+                                    <span>Started by Maria Garcia</span>
+                                    <span>•</span>
+                                    <span>3 messages</span>
+                                </div>
+                            </div>
+                            <div class="thread-actions">
+                                <button class="btn-icon" aria-label="Archive">
+                                    <i class="fas fa-archive"></i>
+                                </button>
+                                <button class="btn-icon" aria-label="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="message-list">
+                            <div class="message-bubble received">
+                                <div class="message-info">
+                                    <div class="message-avatar">
+                                        <span>MG</span>
+                                    </div>
+                                    <div class="message-details">
+                                        <h4>Maria Garcia</h4>
+                                        <span class="message-time">10:30 AM</span>
+                                    </div>
+                                </div>
+                                <div class="message-body">
+                                    <p>Hi, I have a question about the verb conjugation exercise from yesterday's homework. I'm having trouble with irregular verbs in the preterite tense. Could you help clarify when to use different endings?</p>
+                                </div>
+                            </div>
+
+                            <div class="message-bubble sent">
+                                <div class="message-info">
+                                    <div class="message-avatar">
+                                        <span>ME</span>
+                                    </div>
+                                    <div class="message-details">
+                                        <h4>You</h4>
+                                        <span class="message-time">10:45 AM</span>
+                                    </div>
+                                </div>
+                                <div class="message-body">
+                                    <p>Of course! The irregular verbs in the preterite can be tricky. Let me share a helpful guide that breaks down the patterns.</p>
+                                    <div class="message-attachment">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <div class="attachment-info">
+                                            <span>Irregular Verbs Guide.pdf</span>
+                                            <span>245 KB</span>
+                                        </div>
+                                        <button class="btn-icon">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message-bubble received">
+                                <div class="message-info">
+                                    <div class="message-avatar">
+                                        <span>MG</span>
+                                    </div>
+                                    <div class="message-details">
+                                        <h4>Maria Garcia</h4>
+                                        <span class="message-time">11:00 AM</span>
+                                    </div>
+                                </div>
+                                <div class="message-body">
+                                    <p>Thank you so much! This guide is really helpful. I'll review it and let you know if I have any more questions.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-reply">
+                            <div class="reply-box">
+                                <textarea placeholder="Type your message..."></textarea>
+                                <div class="reply-actions">
+                                    <button class="btn-icon" aria-label="Attach file">
+                                        <i class="fas fa-paperclip"></i>
+                                    </button>
+                                    <button class="btn-icon" aria-label="Add emoji">
+                                        <i class="fas fa-smile"></i>
+                                    </button>
+                                    <button class="btn-primary">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/messages.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

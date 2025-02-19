@@ -1,0 +1,79 @@
+<!-- Profile Avatar Section -->
+<div class="profile-avatar">
+    <img src="/images/default-avatar.png" alt="User Avatar" id="userAvatar" class="user-avatar">
+    <div class="avatar-upload">
+        <input type="file" id="avatarUpload" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <button onclick="document.getElementById('avatarUpload').click()" class="btn-change-avatar">
+            Change Avatar
+        </button>
+    </div>
+</div>
+
+<script>
+document.getElementById('avatarUpload').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file
+    if (!file.type.match(/image\/(jpeg|png|webp)/)) {
+        alert('Please upload a valid image file (JPEG, PNG, or WebP)');
+        return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+        alert('File size must be less than 2MB');
+        return;
+    }
+
+    // Create form data
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('Please log in first');
+
+        const response = await fetch('http://localhost:8787/api/profile/avatar', {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        if (!response.ok) throw new Error('Failed to upload avatar');
+
+        const data = await response.json();
+        
+        // Update avatar display
+        document.getElementById('userAvatar').src = data.avatarUrl;
+        
+    } catch (error) {
+        console.error('Avatar upload error:', error);
+        alert(error.message || 'Failed to upload avatar');
+    }
+});
+
+// Load avatar on page load
+window.addEventListener('load', async () => {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const response = await fetch('http://localhost:8787/api/profile/avatar', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.avatarUrl) {
+                document.getElementById('userAvatar').src = data.avatarUrl;
+            }
+        }
+    } catch (error) {
+        console.error('Failed to load avatar:', error);
+    }
+});
+</script> 

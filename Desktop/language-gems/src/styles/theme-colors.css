@@ -1,0 +1,102 @@
+/* Theme colors for different sections */
+
+/* Greetings */
+.theme-greetings {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --accent-color: #FFE66D;
+}
+
+/* Numbers */
+.theme-numbers {
+    --primary-color: #6C5CE7;
+    --secondary-color: #A8E6CF;
+    --accent-color: #FDCB6E;
+}
+
+/* Colors */
+.theme-colors {
+    --primary-color: #FF7675;
+    --secondary-color: #74B9FF;
+    --accent-color: #55EFC4;
+}
+
+/* Animals */
+.theme-animals {
+    --primary-color: #E17055;
+    --secondary-color: #00B894;
+    --accent-color: #FFA502;
+}
+
+/* Family */
+.theme-family {
+    --primary-color: #FF79C6;
+    --secondary-color: #BD93F9;
+    --accent-color: #F1FA8C;
+}
+
+/* Days and Months */
+.theme-calendar {
+    --primary-color: #6C5CE7;
+    --secondary-color: #81ECEC;
+    --accent-color: #FAB1A0;
+}
+
+/* Weather */
+.theme-weather {
+    --primary-color: #0984E3;
+    --secondary-color: #74B9FF;
+    --accent-color: #FFA502;
+}
+
+/* Food and Drinks */
+.theme-food {
+    --primary-color: #E84393;
+    --secondary-color: #55EFC4;
+    --accent-color: #FFEAA7;
+}
+
+/* School */
+.theme-school {
+    --primary-color: #D63031;
+    --secondary-color: #74B9FF;
+    --accent-color: #FDCB6E;
+}
+
+/* Body Parts */
+.theme-body {
+    --primary-color: #E84393;
+    --secondary-color: #00CEC9;
+    --accent-color: #FFA502;
+}
+
+/* Transport */
+.theme-transport {
+    --primary-color: #2D3436;
+    --secondary-color: #74B9FF;
+    --accent-color: #FF7675;
+}
+
+/* Clothing */
+.theme-clothing {
+    --primary-color: #6C5CE7;
+    --secondary-color: #FF79C6;
+    --accent-color: #A8E6CF;
+}
+
+/* Games */
+.theme-games {
+    --primary-color: #FF4757;
+    --secondary-color: #2ED573;
+    --accent-color: #FFCC00;
+}
+
+/* Common hover effects */
+.theme-hover {
+    transition: all var(--transition-speed);
+}
+
+.theme-hover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px var(--shadow-color);
+} 

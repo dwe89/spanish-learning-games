@@ -1,0 +1,132 @@
+/* Language Selection Layout */
+.language-selection {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.language-card {
+    flex: 1;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    backdrop-filter: blur(10px);
+}
+
+.language-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.language-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spanish-bg {
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+}
+
+.french-bg {
+    background: linear-gradient(135deg, #4ECDC4, #556270);
+}
+
+.language-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.language-card:hover .language-overlay {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.language-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.language-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.language-info p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.language-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.start-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    color: white;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.language-card:hover .start-button {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .language-selection {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .language-card {
+        max-width: 100%;
+    }
+
+    .language-image {
+        height: 150px;
+    }
+
+    .language-info {
+        padding: 1.5rem;
+    }
+
+    .language-info h2 {
+        font-size: 1.5rem;
+    }
+} 

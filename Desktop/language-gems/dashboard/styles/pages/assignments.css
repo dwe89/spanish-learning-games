@@ -1,0 +1,195 @@
+/* Assignments Layout */
+.assignments-container {
+    padding: var(--space-lg);
+}
+
+/* Assignments Header */
+.assignments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.assignments-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Assignments Filters */
+.assignments-filters {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* Assignments Grid */
+.assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* Assignment Card */
+.assignment-card {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform var(--transition-fast);
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.assignment-header {
+    padding: var(--space-md);
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.assignment-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.assignment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.assignment-content {
+    padding: var(--space-md);
+}
+
+.assignment-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.assignment-footer {
+    padding: var(--space-md);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+}
+
+.status-pending {
+    background-color: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+.status-completed {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.status-overdue {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+/* Assignment Details */
+.assignment-details {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.details-header {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+}
+
+.details-content {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.details-section {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.section-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Submission Form */
+.submission-form {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] .assignment-card {
+    background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .assignment-header {
+    background-color: var(--dark-bg-tertiary);
+    border-color: var(--dark-border);
+}
+
+[data-theme="dark"] .assignment-footer {
+    border-color: var(--dark-border);
+}
+
+[data-theme="dark"] .details-header {
+    border-color: var(--dark-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .assignments-container {
+        padding: var(--space-md);
+    }
+
+    .assignments-header {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+
+    .assignments-filters {
+        flex-direction: column;
+    }
+
+    .assignments-grid {
+        grid-template-columns: 1fr;
+    }
+} 

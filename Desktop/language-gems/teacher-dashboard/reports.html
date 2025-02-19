@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn/" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading reports...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item active" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Reports</h2>
+                <div class="section-actions">
+                    <div class="filter-group">
+                        <select class="filter-select" id="report-type">
+                            <option value="all">All Reports</option>
+                            <option value="progress">Progress Reports</option>
+                            <option value="performance">Performance Reports</option>
+                            <option value="attendance">Attendance Reports</option>
+                        </select>
+                        <select class="filter-select" id="date-range">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Generate New Report
+                    </button>
+                </div>
+            </div>
+
+            <div class="reports-grid">
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Class Performance Summary</h3>
+                            <p class="report-meta">Generated on March 15, 2024</p>
+                        </div>
+                        <div class="report-actions">
+                            <button class="btn-icon" aria-label="Download report">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Share report">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-preview">
+                        <div class="preview-chart">
+                            <canvas id="performanceSummaryChart"></canvas>
+                        </div>
+                        <div class="preview-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Average Score</span>
+                                <span class="stat-value">85%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Completion Rate</span>
+                                <span class="stat-value">92%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Participation</span>
+                                <span class="stat-value">88%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Student Progress Report</h3>
+                            <p class="report-meta">Generated on March 14, 2024</p>
+                        </div>
+                        <div class="report-actions">
+                            <button class="btn-icon" aria-label="Download report">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Share report">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-preview">
+                        <div class="preview-chart">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                        <div class="preview-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Improved</span>
+                                <span class="stat-value">75%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">At Risk</span>
+                                <span class="stat-value">15%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">On Track</span>
+                                <span class="stat-value">85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Assignment Analysis</h3>
+                            <p class="report-meta">Generated on March 13, 2024</p>
+                        </div>
+                        <div class="report-actions">
+                            <button class="btn-icon" aria-label="Download report">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Share report">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-preview">
+                        <div class="preview-chart">
+                            <canvas id="assignmentChart"></canvas>
+                        </div>
+                        <div class="preview-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Submitted</span>
+                                <span class="stat-value">95%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Graded</span>
+                                <span class="stat-value">88%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Avg Score</span>
+                                <span class="stat-value">82%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Attendance Report</h3>
+                            <p class="report-meta">Generated on March 12, 2024</p>
+                        </div>
+                        <div class="report-actions">
+                            <button class="btn-icon" aria-label="Download report">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Share report">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="report-preview">
+                        <div class="preview-chart">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                        <div class="preview-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Present</span>
+                                <span class="stat-value">92%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Late</span>
+                                <span class="stat-value">5%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Absent</span>
+                                <span class="stat-value">3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scheduled-reports">
+                <div class="section-header">
+                    <h3>Scheduled Reports</h3>
+                    <button class="btn-text">
+                        <i class="fas fa-plus"></i>
+                        Schedule New Report
+                    </button>
+                </div>
+                <div class="scheduled-list">
+                    <div class="scheduled-item">
+                        <div class="schedule-info">
+                            <i class="fas fa-calendar"></i>
+                            <div class="schedule-details">
+                                <h4>Weekly Progress Report</h4>
+                                <p>Every Monday at 9:00 AM</p>
+                            </div>
+                        </div>
+                        <div class="schedule-recipients">
+                            <div class="recipient-avatars">
+                                <span class="recipient-avatar">JS</span>
+                                <span class="recipient-avatar">MG</span>
+                                <span class="recipient-count">+3</span>
+                            </div>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="btn-icon" aria-label="Edit schedule">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Delete schedule">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="scheduled-item">
+                        <div class="schedule-info">
+                            <i class="fas fa-calendar"></i>
+                            <div class="schedule-details">
+                                <h4>Monthly Performance Summary</h4>
+                                <p>1st of every month at 8:00 AM</p>
+                            </div>
+                        </div>
+                        <div class="schedule-recipients">
+                            <div class="recipient-avatars">
+                                <span class="recipient-avatar">AL</span>
+                                <span class="recipient-count">+5</span>
+                            </div>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="btn-icon" aria-label="Edit schedule">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" aria-label="Delete schedule">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/reports.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

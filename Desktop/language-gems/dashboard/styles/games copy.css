@@ -1,0 +1,110 @@
+/* Game List Layout */
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+
+.game-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.game-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.game-box a {
+    text-decoration: none;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.game-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.game-box h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-sm);
+}
+
+.game-box p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-md);
+    line-height: 1.4;
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.stat {
+    text-align: center;
+    color: var(--white);
+}
+
+/* Difficulty Filter */
+.difficulty-filter {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.filter-btn {
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn.active {
+    background: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-list {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .game-box {
+        padding: var(--space-md);
+    }
+
+    .game-icon {
+        font-size: 2rem;
+    }
+
+    .game-box h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .game-box p {
+        font-size: var(--font-size-sm);
+    }
+} 

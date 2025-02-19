@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Match</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles/achievements.css">
+  <link rel="stylesheet" href="../styles/game-state.css">
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    <script type="module">
+        import { injectNavigation } from './../components/navigation.js';
+        injectNavigation();
+    </script>
+
+    <div class="game-background">
+    <div class="crystal-bg"></div>
+    <div class="aurora"></div>
+  </div>
+
+  <div class="game-wrapper">
+    <div class="header">
+      <div class="controls-bar">
+        <div class="left-controls">
+          <button class="mode-btn" id="homeBtn">🏠</button>
+          <button class="mode-btn" id="fullscreenBtn">🔲 Full Screen</button>
+          <button class="mode-btn" data-mode="normal">✨ Normal</button>
+          <button class="mode-btn" data-mode="timed">⏱️ Timed</button>
+          <button class="mode-btn" data-mode="custom">✏️ Enter Words</button>
+          <button class="mode-btn" id="themeBtn">🎨 Theme</button>
+        </div>
+        <div class="stats-bar">
+          <div class="stat-item">💎 <span id="score">0</span>/<span id="totalPairs">0</span></div>
+          <div class="stat-item">⏱️ <span id="timer">00:00</span></div>
+          <div class="stat-item">💡 <span id="hintCount">3</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div id="gameBoard" class="game-board"></div>
+      <div id="answers" class="answers"></div>
+    </div>
+
+    <!-- Saved Games Section -->
+    <div id="savedGames" class="saved-games-section"></div>
+  </div>
+
+  <!-- Custom Words Modal -->
+  <div id="modalOverlay" class="modal-overlay"></div>
+  <div id="customWordsModal" class="modal">
+    <div class="modal-content">
+      <h2>Add Custom Words</h2>
+      <div class="input-group">
+        <input type="text" id="spanishInput" placeholder="Spanish word">
+        <input type="text" id="englishInput" placeholder="English word">
+        <button id="addWordBtn" class="btn">Add Word</button>
+      </div>
+      <div id="wordList" class="word-list"></div>
+      <div class="modal-buttons">
+        <button id="importWordsBtn" class="btn">Import Words</button>
+        <button id="startGameBtn" class="btn">Start Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Select Modal -->
+  <div id="timeSelectModal" class="modal">
+    <div class="modal-content">
+      <h2>⏱️ Select Time Limit</h2>
+      <div class="time-select-container">
+        <button class="time-option" data-time="30">30 seconds</button>
+        <button class="time-option" data-time="60">1 minute</button>
+        <button class="time-option" data-time="120">2 minutes</button>
+        <button class="time-option" data-time="300">5 minutes</button>
+        <div class="custom-time">
+          <input type="number" id="customTime" min="10" max="3600" placeholder="Custom time in seconds">
+          <button class="time-option" id="customTimeBtn">Set Custom Time</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Words Modal -->
+  <div id="importModal" class="modal import-modal">
+    <div class="modal-content">
+      <h2>Import Words</h2>
+      <div class="import-instructions">
+        Enter word pairs (one per line)<br>
+        Format: Spanish,English or Spanish[tab]English<br>
+        Example:<br>
+        hola,hello<br>
+        adiós,goodbye
+      </div>
+      <textarea id="importTextarea" class="import-textarea" 
+        placeholder="Enter your word pairs here..."></textarea>
+      <div class="modal-buttons">
+        <button id="cancelImportBtn" class="btn">Cancel</button>
+        <button id="confirmImportBtn" class="btn">Import Words</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme Modal -->
+  <div id="themeModal" class="modal">
+    <div class="modal-content">
+      <h2>🎨 Select Theme</h2>
+      <div class="theme-grid" id="themeGrid">
+        <!-- Theme options will be populated by JavaScript -->
+      </div>
+      <div class="theme-upload">
+        <button id="uploadThemeBtn" class="btn">
+          📤 Upload Custom Background
+        </button>
+        <input type="file" id="themeImageInput" accept="image/*" style="display: none;">
+      </div>
+      <div class="modal-buttons">
+        <button id="closeThemeBtn" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="correctSound" src="../assets/sounds/correct.mp3"></audio>
+  <audio id="wrongSound" src="../assets/sounds/wrong.mp3"></audio>
+
+  <!-- Scripts -->
+  <script src="../scripts/progress-tracker.js"></script>
+  <script src="../scripts/achievement-system.js"></script>
+  <script src="../scripts/game-state.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

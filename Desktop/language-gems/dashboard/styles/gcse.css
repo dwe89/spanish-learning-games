@@ -1,0 +1,194 @@
+/* GCSE Layout */
+.gcse-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-2xl);
+}
+
+/* Hero Section */
+.gcse-hero {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-2xl);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: var(--font-size-3xl);
+    color: var(--white);
+    margin-bottom: var(--space-lg);
+}
+
+.hero-description {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Exam Topics */
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.topic-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+}
+
+.topic-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--accent-color);
+}
+
+.topic-title {
+    font-size: var(--font-size-xl);
+    color: var(--white);
+    margin-bottom: var(--space-sm);
+}
+
+.topic-description {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+}
+
+/* Study Resources */
+.resources-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.resources-title {
+    font-size: var(--font-size-2xl);
+    color: var(--white);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.resource-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+.resource-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: transform 0.3s ease;
+}
+
+.resource-item:hover {
+    transform: translateY(-3px);
+}
+
+.resource-name {
+    font-size: var(--font-size-lg);
+    color: var(--white);
+    margin-bottom: var(--space-sm);
+}
+
+.resource-type {
+    color: var(--accent-color);
+    font-size: 0.9em;
+    margin-bottom: var(--space-md);
+}
+
+/* Practice Tests */
+.practice-tests {
+    margin-bottom: var(--space-2xl);
+}
+
+.test-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.test-card:hover {
+    transform: translateY(-3px);
+}
+
+.test-info {
+    flex: 1;
+}
+
+.test-title {
+    font-size: var(--font-size-lg);
+    color: var(--white);
+    margin-bottom: var(--space-sm);
+}
+
+.test-meta {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+}
+
+.start-test {
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--accent-color);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.start-test:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .gcse-container {
+        padding: var(--space-lg);
+    }
+
+    .gcse-hero {
+        padding: var(--space-xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resources-section {
+        padding: var(--space-xl);
+    }
+
+    .test-card {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+    }
+
+    .test-info {
+        margin-bottom: var(--space-md);
+    }
+} 

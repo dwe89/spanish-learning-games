@@ -1,0 +1,877 @@
+/* Theme Variables */
+:root {
+    /* Main colors */
+    --primary-color: #4A90E2;
+    --secondary-color: #50E3C2;
+    --accent-color: #F5A623;
+    
+    /* Text colors */
+    --text-color: #333333;
+    --secondary-text: #666666;
+    --light-text: #FFFFFF;
+    
+    /* Background colors */
+    --bg-color: #F5F7FA;
+    --card-bg: #FFFFFF;
+    
+    /* Status colors */
+    --success-color: #27AE60;
+    --error-color: #E74C3C;
+    --warning-color: #F39C12;
+    
+    /* Shadow */
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Gradients */
+    --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --accent-gradient: linear-gradient(135deg, var(--accent-color), #F7B733);
+    --background-primary: #FFFFFF;
+    --background-secondary: #F9FAFB;
+    --background-gradient: linear-gradient(135deg, #7C3AED 0%, #F472B6 100%);
+    --border-radius-sm: 0.375rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+}
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.5;
+    background-color: var(--background-secondary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+    background: var(--background-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.875rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--background-gradient);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-light);
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Brand Elements */
+.brand-text {
+    background: var(--background-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.brand-gradient {
+    background: var(--background-gradient);
+}
+
+/* Containers */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Grid System */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+    .grid-cols-4 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .grid-cols-3, .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-2, .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
+    
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.875rem; }
+    h3 { font-size: 1.5rem; }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--transition-normal);
+}
+
+.animate-slide-up {
+    animation: slideUp var(--transition-normal);
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: var(--background-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient {
+    background: var(--background-gradient);
+}
+
+.shadow-hover:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.transform-hover:hover {
+    transform: translateY(-4px);
+}
+
+/* THEME COMPONENTS */
+/* Animations */
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: rotate(-1deg) translateY(0); }
+    50% { transform: rotate(-1deg) translateY(-5px); }
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #4a90e2, #6c5ce7);
+    border-radius: 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: sparkle 3s infinite;
+    z-index: -1;
+}
+
+/* Section Cards */
+.section-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 1rem;
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+.section-card:hover {
+    animation: none;
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 0 12px 40px rgba(74, 144, 226, 0.2);
+}
+
+.section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(74, 144, 226, 0.1) 0%,
+        rgba(108, 92, 231, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.section-card:hover::before {
+    opacity: 1;
+}
+
+.section-card::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        #4a90e2 0%, 
+        #6c5ce7 50%, 
+        #4a90e2 100%);
+    z-index: -1;
+    border-radius: 22px;
+    animation: borderFlow 4s linear infinite;
+    background-size: 200% auto;
+    opacity: 0.3;
+}
+
+/* Grid Systems */
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+/* Section Titles */
+.section-title,
+.french-activities h2,
+.spanish-activities h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem 0 1.5rem;
+    color: #2d3436;
+    position: relative;
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(145deg, #ffffff, #f8f4ff);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+    transform: rotate(-1deg);
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+.section-title::after,
+.french-activities h2::after,
+.spanish-activities h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4a90e2, #6c5ce7);
+    border-radius: 2px;
+}
+
+/* Audience Switcher */
+.audience-switcher {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+    gap: 2rem;
+    max-width: 800px;
+    padding: 1rem;
+}
+
+.audience-btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.3rem;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #2d3436;
+    font-weight: 600;
+    position: relative;
+}
+
+.audience-btn.active {
+    border-color: #4a90e2;
+    background: linear-gradient(145deg, #e3f2fd, #c8e1fa);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+    color: #1a5a99;
+}
+
+.audience-btn.active::after {
+    content: '✓';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4a90e2;
+    font-size: 1.2em;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        margin: 1.5rem 0 1rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .header .title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin: 1.5rem 0 1rem;
+    }
+    
+    .audience-switcher {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .audience-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* Add all other shared animations and components */
+
+/* Enhanced Header */
+.learn-header {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    padding: 5rem 2rem;
+    position: relative;
+    background: linear-gradient(135deg, #4a90e2, #6c5ce7) !important;
+}
+
+.learn-header .title {
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.learn-header .subtitle {
+    font-size: 1.4rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Enhanced Card Text Styles */
+.section-card h3 {
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+    color: #2d3436;
+    line-height: 1.3;
+    position: relative;
+    z-index: 2;
+}
+
+.section-card p {
+    font-size: 1.1rem;
+    color: #4a5568;
+    margin: 0 0 1.5rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+}
+
+/* Larger Card Sizes */
+.section-card {
+    min-height: 200px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.section-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* Header Decoration Styles */
+.header-decoration {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.deco-emoji {
+    font-size: 2.5rem;
+    animation: float 3s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Icon Styling */
+.section-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #4a90e2, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    display: inline-block;
+}
+
+/* Add to existing theme.css */
+.activity-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(74, 144, 226, 0.2);
+}
+
+.activity-card h3 {
+    margin: 1rem 0 0.5rem;
+    color: #2d3436;
+}
+
+.activity-card p {
+    color: #4a5568;
+    font-size: 1rem;
+}
+
+
+/* Add to existing theme.css */
+.activity-section {
+    background: transparent;
+    padding: 2rem 0;
+    margin: 2rem 0;
+    box-shadow: none;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.activity-card {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.15);
+}
+
+.activity-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #4a90e2;
+}
+
+        /* PRESERVE EXISTING FRENCH RESOURCES CONTENT */
+        /* ADD SPANISH-LEARN STYLES */
+        .header {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            padding: 4rem 1rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            background: linear-gradient(135deg, #4a90e2, #6c5ce7);
+            border-radius: 20px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: sparkle 3s infinite;
+        }
+
+        .resource-card {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: cardEnter 0.6s ease-out forwards;
+        }
+
+        .resource-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            border-radius: 22px;
+            background: linear-gradient(45deg, #4a90e2 0%, #6c5ce7 50%, #4a90e2 100%);
+            background-size: 200% auto;
+            opacity: 0.3;
+            animation: borderFlow 4s linear infinite;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 12px 40px rgba(74, 144, 226, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            color: #2d3436;
+            position: relative;
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(145deg, #ffffff, #f8f4ff);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            transform: rotate(-1deg);
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: rotate(-1deg) translateY(0); }
+            50% { transform: rotate(-1deg) translateY(-5px); }
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90e2, #6c5ce7);
+            border-radius: 2px;
+        }
+
+        /* KEEP EXISTING RESOURCES.CSS STYLES BELOW */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        /* IMPROVED HERO SECTION */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* CARD ANIMATIONS */
+        .resource-card {
+            animation: cardEnter 0.6s ease-out forwards;
+        }
+
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* IMPROVED LAYOUT SPACING */
+        .resources-section {
+            margin: 3rem 0;
+            padding: 2rem 0;
+        }
+
+        .resources-cta {
+            margin: 4rem 0;
+            padding: 3rem 1rem;
+           background-color: rgba(74, 144, 226, 0.1); /* Light blue background */
+            border-radius: 20px; /* Rounded corners */
+            text-align: center;
+            /* Ensures text is centered within the resources CTA */
+        }
+
+/* Add to existing theme styles */
+.choice-card h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    margin: 1.5rem 0;
+    color: var(--curriculum-primary);
+    position: relative;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.choice-card:hover h2 {
+    transform: scale(1.05);
+    text-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+}
+
+.choice-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--curriculum-secondary);
+    border-radius: 2px;
+}
+
+/* Enhance card styling */
+.choice-card {
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(52, 152, 219, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(52, 152, 219, 0.15);
+    border-color: var(--curriculum-secondary);
+}
+
+.choice-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 25%,
+        rgba(52, 152, 219, 0.05) 50%,
+        transparent 75%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+}
+
+.choice-card:hover::before {
+    animation: shine 1.5s forwards;
+}
+
+@keyframes shine {
+    0% {
+        left: -50%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+
+/* Update feature list */
+.feature-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-list li:hover {
+    transform: translateX(8px);
+    color: var(--curriculum-secondary);
+}
+
+/* Enhance CTA buttons */
+.cta-button {
+    background: linear-gradient(135deg, var(--curriculum-secondary), #2980b9);
+    color: white !important;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    margin-top: 1.5rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .choice-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+    }
+}

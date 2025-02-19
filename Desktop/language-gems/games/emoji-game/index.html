@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Emoji Match - Spanish Learning</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div class="game-wrapper">
+        <header class="header">
+            <div class="header-content">
+                <div class="left-controls">
+                    <a href="../index.html" class="nav-btn">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                    <div class="music-control">
+                        <button id="musicToggleBtn" class="nav-btn">
+                            <i class="fas fa-music"></i>
+                            Music
+                        </button>
+                        <div class="music-dropdown">
+                            <select id="musicSelect" class="music-select">
+                                <option value="background">Default Music</option>
+                                <option value="battle">Battle Music</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="themeBtn" class="nav-btn"><i class="fas fa-palette"></i> Theme</button>
+                    <button id="customBtn" class="nav-btn"><i class="fas fa-plus"></i> Custom</button>
+                </div>
+
+                <h1 class="title">Picture Match</h1>
+
+                <div class="right-controls">
+                    <div class="stats-group">
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i>
+                            <span>Score: <span id="score">0</span></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Time: <span id="timer">00:00</span></span>
+                        </div>
+                    </div>
+                    <button id="fullscreenBtn" class="nav-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Container -->
+        <div class="game-container">
+            <div class="words-column" id="answers"></div>
+            <div class="canvas-container">
+                <div id="gameBoard"></div>
+            </div>
+        </div>
+
+        <!-- Theme Modal -->
+        <div class="modal" id="themeModal">
+            <div class="modal-content">
+                <h2 class="modal-title">Choose Theme</h2>
+                <div class="theme-selector">
+                    <div class="theme-option active" data-theme="default">
+                        <img src="backgrounds/everything spanish.jpg" alt="Default Theme" class="theme-preview">
+                        <span class="theme-name">Default</span>
+                    </div>
+                    <div class="theme-option" data-theme="forest">
+                        <img src="backgrounds/forest.jpg" alt="Forest Theme" class="theme-preview">
+                        <span class="theme-name">Forest</span>
+                    </div>
+                    <div class="theme-option" data-theme="temple">
+                        <img src="backgrounds/temple_of_chaos.jpg" alt="Temple Theme" class="theme-preview">
+                        <span class="theme-name">Temple</span>
+                    </div>
+                    <div class="theme-option" data-theme="classroom">
+                        <img src="backgrounds/typical classroom.jpg" alt="Classroom Theme" class="theme-preview">
+                        <span class="theme-name">Classroom</span>
+                    </div>
+                    <div class="theme-option" data-theme="cave">
+                        <img src="backgrounds/cave_of_memories.jpg" alt="Cave Theme" class="theme-preview">
+                        <span class="theme-name">Cave</span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="closeThemeBtn" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Game Modal -->
+        <div class="modal" id="customModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Custom Game</h2>
+                    <button class="close-btn" id="closeCustomBtn">&times;</button>
+                </div>
+                <div class="modal-tabs">
+                    <button class="tab-btn active" data-tab="create">Create Game</button>
+                    <button class="tab-btn" data-tab="saved">Saved Games</button>
+                </div>
+                <div class="tab-content" id="create">
+                    <div class="word-input-group">
+                        <div class="word-entry">
+                            <input type="text" id="spanishWord" placeholder="Enter Spanish Word" class="word-input">
+                            <button class="image-search-btn" id="imageSearchTrigger">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" id="addWordBtn">Add Word</button>
+                    </div>
+                    <div class="custom-word-list" id="customWordList"></div>
+                    <div class="share-section">
+                        <button class="btn btn-secondary" id="generateLinkBtn">
+                            <i class="fas fa-share-alt"></i> Generate Share Link
+                        </button>
+                    </div>
+                </div>
+                <div class="tab-content" id="saved" style="display: none;">
+                    <div class="saved-games-container">
+                        <h3>Your Saved Games</h3>
+                        <div id="savedGamesList" class="saved-games-list"></div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="goBackBtn">Back to Game</button>
+                    <button class="btn btn-primary" id="startCustomGameBtn">Play with Custom Words</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Search Modal -->
+        <div class="modal" id="imageSearchModal">
+            <div class="modal-content">
+                <h3>Search Images</h3>
+                <div class="search-controls">
+                    <input type="text" id="imageSearchInput" placeholder="Search for images...">
+                    <button class="btn btn-primary" id="searchImagesBtn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="image-results" id="imageSearchResults"></div>
+                <div id="imageSearchLoading" class="loading-spinner" style="display: none;">
+                    Searching...
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="closeImageSearch">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div class="modal-overlay"></div>
+
+        <!-- Audio Elements -->
+        <audio id="backgroundMusic" src="assets/music/background.mp3" preload="auto" loop></audio>
+        <audio id="clickSound" src="assets/sounds/click.mp3" preload="auto"></audio>
+        <audio id="dropSound" src="assets/sounds/drop.mp3" preload="auto"></audio>
+        <audio id="correctSound" src="assets/sounds/correct.mp3" preload="auto"></audio>
+        <audio id="incorrectSound" src="assets/sounds/incorrect.mp3" preload="auto"></audio>
+    </div>
+
+    <script type="module" src="categories.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

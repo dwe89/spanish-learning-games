@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Test Data - Teacher Dashboard</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .init-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .init-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .warning-text {
+            color: #991b1b;
+            margin: 20px 0;
+            padding: 10px;
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-radius: 4px;
+        }
+
+        .init-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .init-button:hover {
+            background: #4338ca;
+        }
+
+        .init-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="init-container">
+        <div class="init-card">
+            <h1>Initialize Test Data</h1>
+            <p>This will create test data in your Firebase database, including:</p>
+            <ul>
+                <li>10 test student accounts</li>
+                <li>2 test classes with schedules</li>
+                <li>Sample assignments for each class</li>
+                <li>Sample announcements</li>
+            </ul>
+
+            <div class="warning-text">
+                <strong>Warning:</strong> This action will create new data in your database. Make sure you are in a development or testing environment before proceeding.
+            </div>
+
+            <button id="init-test-data" class="init-button">
+                <i class="fas fa-database"></i>
+                Initialize Test Data
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../firebase/config.js"></script>
+    <script type="module" src="../scripts/init-test-data.js"></script>
+</body>
+</html> 

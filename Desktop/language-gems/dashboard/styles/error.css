@@ -1,0 +1,98 @@
+.error-page,
+.offline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    text-align: center;
+    padding: var(--space-2xl);
+}
+
+.error-content,
+.offline-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    width: 100%;
+}
+
+.error-content h1,
+.offline-content h1 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-lg);
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.error-content p,
+.offline-content p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-xl);
+    font-size: var(--font-size-lg);
+}
+
+.error-options {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-xl);
+}
+
+.btn {
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.offline-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+}
+
+.retry-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--accent-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+    transform: translateY(-2px);
+    background: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .error-content,
+    .offline-content {
+        padding: var(--space-lg);
+    }
+
+    .error-content h1,
+    .offline-content h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .error-options {
+        flex-direction: column;
+    }
+} 

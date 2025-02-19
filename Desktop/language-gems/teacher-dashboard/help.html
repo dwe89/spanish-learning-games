@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Teacher Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/help.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../assets/logo.png" alt="Logo">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="dashboard-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="classes.html"><i class="fas fa-users"></i> Classes</a></li>
+                    <li><a href="assignments.html"><i class="fas fa-tasks"></i> Assignments</a></li>
+                    <li><a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a></li>
+                    <li><a href="resources.html"><i class="fas fa-book"></i> Resources</a></li>
+                    <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                    <li class="active"><a href="help.html"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Help & Support</h1>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Dashboard</a> /
+                        <span>Help</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="../assets/avatar-placeholder.png" alt="User Avatar" id="userAvatar">
+                        <div class="user-info">
+                            <span class="user-name">Teacher Name</span>
+                            <span class="user-role">Teacher</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="help-search">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search help articles..." class="search-input">
+                        <button class="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="help-categories">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Getting Started</h3>
+                        <p>Learn the basics of using the teacher dashboard</p>
+                        <a href="#" class="category-link">View Guides <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Class Management</h3>
+                        <p>Tips for managing your classes and students</p>
+                        <a href="#" class="category-link">View Guides <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>Assignments</h3>
+                        <p>Learn how to create and manage assignments</p>
+                        <a href="#" class="category-link">View Guides <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Progress Tracking</h3>
+                        <p>Understanding student progress and analytics</p>
+                        <a href="#" class="category-link">View Guides <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I create a new class?</h3>
+                                <button class="toggle-answer"><i class="fas fa-chevron-down"></i></button>
+                            </div>
+                            <div class="faq-answer">
+                                <p>To create a new class, go to the Classes section and click the "Add Class" button. Fill in the required information such as class name, level, and schedule.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I track student progress?</h3>
+                                <button class="toggle-answer"><i class="fas fa-chevron-down"></i></button>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Visit the Progress section to view detailed analytics about your students' performance. You can track individual progress, class averages, and specific skill improvements.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I create assignments?</h3>
+                                <button class="toggle-answer"><i class="fas fa-chevron-down"></i></button>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Navigate to the Assignments section and click "Create Assignment." You can choose from various assignment types, set due dates, and assign to specific classes or students.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-contact">
+                    <h2>Need More Help?</h2>
+                    <div class="contact-options">
+                        <div class="contact-card">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Support</h3>
+                            <p>Get help from our support team</p>
+                            <a href="mailto:support@spanishlearning.com" class="btn-contact">Contact Support</a>
+                        </div>
+                        <div class="contact-card">
+                            <i class="fas fa-video"></i>
+                            <h3>Video Tutorials</h3>
+                            <p>Watch our helpful guides</p>
+                            <a href="#" class="btn-contact">Watch Tutorials</a>
+                        </div>
+                        <div class="contact-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Community Forum</h3>
+                            <p>Connect with other teachers</p>
+                            <a href="#" class="btn-contact">Join Discussion</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../scripts/theme-switcher.js"></script>
+    <script src="../scripts/teacher-dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const toggleBtn = item.querySelector('.toggle-answer');
+                const answer = item.querySelector('.faq-answer');
+                
+                toggleBtn.addEventListener('click', () => {
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                    toggleBtn.querySelector('i').classList.toggle('fa-chevron-up');
+                    toggleBtn.querySelector('i').classList.toggle('fa-chevron-down');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                // Implement search functionality here
+            });
+        });
+    </script>
+</body>
+</html>

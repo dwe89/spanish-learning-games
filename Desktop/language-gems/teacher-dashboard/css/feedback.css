@@ -1,0 +1,325 @@
+/* Feedback Page Specific Styles */
+
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feedback-card {
+    background: var(--surface-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feedback-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.feedback-card.priority-high {
+    border: 2px solid var(--color-red-500);
+}
+
+.feedback-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.feedback-type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.feedback-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.feedback-status.new {
+    background: var(--color-blue-100);
+    color: var(--color-blue-600);
+}
+
+.feedback-status.in-progress {
+    background: var(--color-yellow-100);
+    color: var(--color-yellow-600);
+}
+
+.feedback-status.resolved {
+    background: var(--color-green-100);
+    color: var(--color-green-600);
+}
+
+.feedback-status i {
+    font-size: 0.75rem;
+}
+
+.feedback-content {
+    padding: 1.5rem;
+}
+
+.feedback-content h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.feedback-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.feedback-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: var(--color-yellow-500);
+    display: flex;
+    gap: 0.25rem;
+}
+
+.feedback-text {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.feedback-footer {
+    padding: 1rem 1.5rem;
+    background: var(--surface-hover);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.feedback-footer .btn-primary {
+    margin-left: auto;
+}
+
+/* Feedback Trends Section */
+.feedback-trends {
+    margin-top: 3rem;
+}
+
+.trend-filters {
+    display: flex;
+    gap: 1rem;
+}
+
+.trend-filters .btn-text {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.trend-filters .btn-text.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.trend-card {
+    background: var(--surface-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+}
+
+.trend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.trend-header h4 {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+}
+
+.trend-header i {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.trend-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.trend-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;
+}
+
+.trend-list li:last-child {
+    border-bottom: none;
+}
+
+.trend-count {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.rating-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+
+.rating-label {
+    width: 30px;
+    color: var(--text-secondary);
+}
+
+.bar-container {
+    flex: 1;
+    height: 8px;
+    background: var(--surface-hover);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.rating-count {
+    width: 40px;
+    text-align: right;
+    color: var(--text-secondary);
+}
+
+.response-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.response-stat {
+    padding: 1rem;
+    background: var(--surface-hover);
+    border-radius: 8px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Filter Group Styles */
+.filter-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.filter-select {
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-card);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color-light);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .filter-group {
+        flex-direction: column;
+    }
+
+    .feedback-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trends-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feedback-meta {
+        flex-wrap: wrap;
+    }
+
+    .feedback-footer {
+        flex-wrap: wrap;
+    }
+
+    .feedback-footer .btn-primary {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .response-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .trend-filters {
+        flex-wrap: wrap;
+    }
+} 

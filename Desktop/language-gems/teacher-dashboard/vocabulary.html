@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+
+
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p class="loading-message">Loading vocabulary lists...</p>
+    </div>
+
+    <!-- Top Menu -->
+    <header class="dashboard-header">
+        <div class="header-search">
+            <input type="search" placeholder="Search vocabulary..." aria-label="Search vocabulary">
+        </div>
+        <div class="header-actions">
+            <button class="action-button notifications" aria-label="Notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <button class="action-button create-new" aria-label="Create new vocabulary list">
+                <i class="fas fa-plus"></i>
+                Create List
+            </button>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <div class="nav-section">
+                    <h3>Analytics</h3>
+                    <a class="nav-item" href="index.html">
+                        <i class="fas fa-chart-line"></i>
+                        Overview
+                    </a>
+                    <a class="nav-item" href="student-progress.html">
+                        <i class="fas fa-user-graduate"></i>
+                        Student Progress
+                    </a>
+                    <a class="nav-item" href="class-analytics.html">
+                        <i class="fas fa-users"></i>
+                        Class Analytics
+                    </a>
+                    <a class="nav-item" href="reports.html">
+                        <i class="fas fa-file-alt"></i>
+                        Reports
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <h3>Management</h3>
+                    <a class="nav-item" href="class-list.html">
+                        <i class="fas fa-list"></i>
+                        Class Lists
+                    </a>
+                    <a class="nav-item" href="assignments.html">
+                        <i class="fas fa-tasks"></i>
+                        Assignments
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <h3>Resources</h3>
+                    <a class="nav-item" href="/play.html">
+                        <i class="fas fa-gamepad"></i>
+                        Games
+                    </a>
+                    <a class="nav-item" href="lesson-plans.html">
+                        <i class="fas fa-book"></i>
+                        Lesson Plans
+                    </a>
+                    <a class="nav-item" href="marketplace.html">
+                        <i class="fas fa-store"></i>
+                        Marketplace
+                    </a>
+                    <a class="nav-item active" href="vocabulary.html">
+                        <i class="fas fa-language"></i>
+                        Vocabulary
+                    </a>
+                    <a class="nav-item" href="library.html">
+                        <i class="fas fa-bookmark"></i>
+                        My Library
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <h3>Communication</h3>
+                    <a class="nav-item" href="messages.html">
+                        <i class="fas fa-envelope"></i>
+                        Messages
+                    </a>
+                    <a class="nav-item" href="announcements.html">
+                        <i class="fas fa-bullhorn"></i>
+                        Announcements
+                    </a>
+                    <a class="nav-item" href="feedback.html">
+                        <i class="fas fa-comment-dots"></i>
+                        Feedback
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <h3>Admin</h3>
+                    <a class="nav-item" href="curriculum.html">
+                        <i class="fas fa-graduation-cap"></i>
+                        Curriculum
+                    </a>
+                    <a class="nav-item" href="assessments.html">
+                        <i class="fas fa-clipboard-check"></i>
+                        Assessments
+                    </a>
+                    <a class="nav-item" href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h1>Vocabulary Lists</h1>
+                <div class="section-actions">
+                    <button class="btn btn-secondary" id="import-vocab-btn">
+                        <i class="fas fa-file-import"></i> Import List
+                    </button>
+                    <button class="btn btn-primary" id="create-vocab-btn">
+                        <i class="fas fa-plus"></i> Create List
+                    </button>
+                </div>
+            </div>
+
+            <div class="vocabulary-filters">
+                <select class="filter-select" id="class-filter">
+                    <option value="all">All Classes</option>
+                </select>
+                <select class="filter-select" id="level-filter">
+                    <option value="all">All Levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+                <select class="filter-select" id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="common">Common Words</option>
+                    <option value="academic">Academic</option>
+                    <option value="business">Business</option>
+                    <option value="travel">Travel</option>
+                    <option value="medical">Medical</option>
+                </select>
+            </div>
+
+            <div id="vocabulary-lists" class="items-list">
+                <!-- Vocabulary lists will be loaded here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/vocabulary.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+</body>
+</html>

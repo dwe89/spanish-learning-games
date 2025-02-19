@@ -1,0 +1,460 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Teacher Dashboard</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../styles/main.css" as="style">
+    <link rel="preload" href="../styles/dashboard.css" as="style">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation Menu -->
+    <nav class="nav-menu">
+    <div class="menu-content">
+        <a href="/" class="logo">
+            <i class="fas fa-gem logo-icon"></i>
+            Language Gems
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/teach.html" class="nav-link active">Teach</a>
+            <a href="/play.html" class="nav-link">Play</a>
+            <a href="/learn/" class="nav-link">Learn</a>
+            <a href="/about.html" class="nav-link">About</a>
+        </div>
+        <div class="auth-buttons">
+            <div id="auth-content">
+                <!-- This will be replaced by the user profile when signed in -->
+                <a href="#" class="auth-button login-button" id="loginBtn">Log in / Sign up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Loading resources...</span>
+        </div>
+        <p class="loading-message">Loading...</p>
+    </div>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+    <div class="header-search">
+        <input type="search" placeholder="Search students, resources, or activities..." aria-label="Search">
+    </div>
+    <div class="header-actions">
+        <button class="action-button notifications" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+    </div>
+</header>
+
+    <div class="dashboard-container">
+        <!-- Side Menu -->
+        <aside class="dashboard-sidebar">
+    <nav class="dashboard-nav">
+        <div class="nav-section">
+            <h3>ANALYTICS</h3>
+            <a class="nav-item" href="index.html">
+                <i class="fas fa-chart-line"></i>
+                Overview
+            </a>
+            <a class="nav-item" href="student-progress.html">
+                <i class="fas fa-user-graduate"></i>
+                Student Progress
+            </a>
+            <a class="nav-item" href="class-analytics.html">
+                <i class="fas fa-users"></i>
+                Class Analytics
+            </a>
+            <a class="nav-item" href="reports.html">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>MANAGEMENT</h3>
+            <a class="nav-item" href="class-list.html">
+                <i class="fas fa-list"></i>
+                Class Lists
+            </a>
+            <a class="nav-item" href="assignments.html">
+                <i class="fas fa-tasks"></i>
+                Assignments
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>RESOURCES</h3>
+            <a class="nav-item active" href="resources.html">
+                <i class="fas fa-folder"></i>
+                Resources
+            </a>
+            <a class="nav-item" href="games.html">
+                <i class="fas fa-gamepad"></i>
+                Games
+            </a>
+            <a class="nav-item" href="lessons.html">
+                <i class="fas fa-book-open"></i>
+                Lesson Plans
+            </a>
+            <a class="nav-item" href="marketplace.html">
+                <i class="fas fa-store"></i>
+                Marketplace
+            </a>
+            <a class="nav-item" href="library.html">
+                <i class="fas fa-bookmark"></i>
+                My Library
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>COMMUNICATION</h3>
+            <a class="nav-item" href="messages.html">
+                <i class="fas fa-envelope"></i>
+                Messages
+            </a>
+            <a class="nav-item" href="announcements.html">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+            <a class="nav-item" href="feedback.html">
+                <i class="fas fa-comment-dots"></i>
+                Feedback
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <h3>ADMIN</h3>
+            <a class="nav-item" href="curriculum.html">
+                <i class="fas fa-graduation-cap"></i>
+                Curriculum
+            </a>
+            <a class="nav-item" href="assessments.html">
+                <i class="fas fa-clipboard-check"></i>
+                Assessments
+            </a>
+            <a class="nav-item" href="settings.html">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+    </nav>
+</aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-main" role="main" tabindex="-1">
+            <div class="section-header">
+                <h2>Resources</h2>
+                <div class="section-actions">
+                    <div class="filter-group">
+                        <select class="filter-select" id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="worksheets">Worksheets</option>
+                            <option value="presentations">Presentations</option>
+                            <option value="audio">Audio</option>
+                            <option value="video">Video</option>
+                        </select>
+                        <select class="filter-select" id="level-filter">
+                            <option value="all">All Levels</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <select class="filter-select" id="topic-filter">
+                            <option value="all">All Topics</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="vocabulary">Vocabulary</option>
+                            <option value="conversation">Conversation</option>
+                            <option value="culture">Culture</option>
+                        </select>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-secondary">
+                            <i class="fas fa-upload"></i>
+                            Import Resources
+                        </button>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Create Resource
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Resources</h3>
+                        <p class="stat-number">156</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12 this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Downloads</h3>
+                        <p class="stat-number">1.2k</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +15% this week
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Avg Rating</h3>
+                        <p class="stat-number">4.8</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +0.2 this month
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Shares</h3>
+                        <p class="stat-number">324</p>
+                        <span class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +28 this week
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-preview">
+                        <img src="../assets/resource-preview.jpg" alt="Spanish Verbs Worksheet Preview">
+                        <div class="resource-type worksheet">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-header">
+                            <h3>Spanish Verbs Worksheet</h3>
+                            <div class="resource-meta">
+                                <span class="resource-level">Beginner</span>
+                                <span class="resource-topic">Grammar</span>
+                            </div>
+                        </div>
+                        <p class="resource-description">
+                            Comprehensive worksheet covering regular and irregular Spanish verbs in present tense.
+                        </p>
+                        <div class="resource-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>245</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-comment"></i>
+                                <span>12</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resource-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-preview">
+                        <img src="../assets/presentation-preview.jpg" alt="Spanish Culture Presentation Preview">
+                        <div class="resource-type presentation">
+                            <i class="fas fa-file-powerpoint"></i>
+                        </div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-header">
+                            <h3>Spanish Culture Presentation</h3>
+                            <div class="resource-meta">
+                                <span class="resource-level">Intermediate</span>
+                                <span class="resource-topic">Culture</span>
+                            </div>
+                        </div>
+                        <p class="resource-description">
+                            Interactive presentation about Spanish festivals and traditions.
+                        </p>
+                        <div class="resource-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>189</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-comment"></i>
+                                <span>8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resource-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-preview">
+                        <img src="../assets/audio-preview.jpg" alt="Spanish Pronunciation Audio Preview">
+                        <div class="resource-type audio">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-header">
+                            <h3>Spanish Pronunciation Guide</h3>
+                            <div class="resource-meta">
+                                <span class="resource-level">All Levels</span>
+                                <span class="resource-topic">Pronunciation</span>
+                            </div>
+                        </div>
+                        <p class="resource-description">
+                            Audio guide for mastering Spanish pronunciation and accent.
+                        </p>
+                        <div class="resource-stats">
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span>312</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-comment"></i>
+                                <span>15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resource-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                        <button class="btn-icon" aria-label="Preview">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn-icon" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h3>Recent Activity</h3>
+                    <button class="btn-text">View All</button>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon download">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-title">Resource Downloaded</p>
+                            <p class="activity-desc">Maria Garcia downloaded "Spanish Verbs Worksheet"</p>
+                            <span class="activity-time">2 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon review">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-title">New Review</p>
+                            <p class="activity-desc">John Smith rated "Spanish Culture Presentation" 5 stars</p>
+                            <span class="activity-time">15 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon share">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-title">Resource Shared</p>
+                            <p class="activity-desc">Ana Lopez shared "Spanish Pronunciation Guide" with Class B</p>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" aria-live="assertive"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../services/auth-service.js"></script>
+    <script type="module" src="../services/state-service.js"></script>
+    <script type="module" src="../utils/ui-utils.js"></script>
+    <script type="module" src="../services/base-service.js"></script>
+    <script type="module" src="scripts/resources.js"></script>
+
+    <!-- Fallback for JavaScript disabled -->
+    <noscript>
+        <div class="error-message">
+            JavaScript is required to use the Teacher Dashboard. Please enable JavaScript in your browser settings.
+        </div>
+    </noscript>
+
+ </body></html>

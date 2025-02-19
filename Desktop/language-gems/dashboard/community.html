@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - Language Gems</title>
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/community.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Scripts -->
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (await DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        async function loadScripts() {
+            // Load API service first
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            // Then load menu
+            const menuScript = document.createElement('script');
+            menuScript.src = '../scripts/load-menu.js';
+            document.body.appendChild(menuScript);
+
+            // Finally load dashboard scripts
+            const dashboardScript = document.createElement('script');
+            dashboardScript.src = '../scripts/student-dashboard.js';
+            document.body.appendChild(dashboardScript);
+
+            // Load page-specific script
+            const communityScript = document.createElement('script');
+            communityScript.src = '../scripts/community.js';
+            document.body.appendChild(communityScript);
+        }
+    </script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="community-container">
+                <div class="community-header">
+                    <h2>Community</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="findPartnerBtn">
+                            <i class="fas fa-user-friends"></i> Find Study Partner
+                        </button>
+                        <button class="btn btn-primary" id="createPostBtn">
+                            <i class="fas fa-plus"></i> Create Post
+                        </button>
+                    </div>
+                </div>
+
+                <div class="community-content">
+                    <div class="community-sidebar">
+                        <div class="community-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <div class="stat-info">
+                                    <span class="stat-number">0</span>
+                                    <span class="stat-label">Active Users</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-comments"></i>
+                                <div class="stat-info">
+                                    <span class="stat-number">0</span>
+                                    <span class="stat-label">Discussions</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-topics">
+                            <h3>Trending Topics</h3>
+                            <ul class="topics-list" id="trendingTopics">
+                                <!-- Will be populated by JavaScript -->
+                            </ul>
+                        </div>
+
+                        <div class="active-users">
+                            <h3>Active Users</h3>
+                            <ul class="users-list" id="activeUsers">
+                                <!-- Will be populated by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="posts-section">
+                        <div class="posts-header">
+                            <div class="posts-filters">
+                                <button class="filter-btn active" data-filter="all">All Posts</button>
+                                <button class="filter-btn" data-filter="questions">Questions</button>
+                                <button class="filter-btn" data-filter="discussions">Discussions</button>
+                                <button class="filter-btn" data-filter="resources">Resources</button>
+                            </div>
+                            <div class="posts-sort">
+                                <select id="sortSelect">
+                                    <option value="recent">Most Recent</option>
+                                    <option value="popular">Most Popular</option>
+                                    <option value="active">Most Active</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="posts-list" id="postsList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Post Modal -->
+            <div class="modal" id="createPostModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Create New Post</h3>
+                        <button class="close-btn">×</button>
+                    </div>
+                    <form id="createPostForm">
+                        <div class="form-group">
+                            <label for="postTitle">Title</label>
+                            <input type="text" id="postTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postType">Post Type</label>
+                            <select id="postType" required>
+                                <option value="question">Question</option>
+                                <option value="discussion">Discussion</option>
+                                <option value="resource">Resource</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="postContent">Content</label>
+                            <textarea id="postContent" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="postTags">Tags</label>
+                            <input type="text" id="postTags" placeholder="Add tags separated by commas">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelPost">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

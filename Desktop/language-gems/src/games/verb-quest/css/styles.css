@@ -1,0 +1,109 @@
+.dev-panel {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #666;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 9999;
+    color: #fff;
+    font-family: monospace;
+    min-width: 250px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dev-panel.visible {
+    display: block !important;
+}
+
+.dev-panel h3 {
+    margin: 0 0 10px 0;
+    color: #0f0;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+.dev-panel-section {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.dev-panel-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.dev-stats {
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.dev-stats span {
+    color: #0f0;
+    font-weight: bold;
+}
+
+.dev-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.dev-btn:hover {
+    background: #444;
+    border-color: #666;
+    transform: translateY(-1px);
+}
+
+.dev-btn.danger {
+    background: #500;
+    border-color: #800;
+}
+
+.dev-btn.danger:hover {
+    background: #600;
+    border-color: #900;
+}
+
+.dev-btn.success {
+    background: #050;
+    border-color: #080;
+}
+
+.dev-btn.success:hover {
+    background: #060;
+    border-color: #090;
+}
+
+#debug-overlay {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #0f0;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 9999;
+    pointer-events: none;
+    white-space: pre;
+    border: 1px solid #0f0;
+} 

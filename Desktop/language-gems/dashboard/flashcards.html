@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards - Language Gems</title>
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/flashcards.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Scripts -->
+    <script src="../scripts/dashboard-auth.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            if (await DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                loadingOverlay.classList.remove('active');
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        async function loadScripts() {
+            // Create a promise for API service loading
+            const loadAPI = new Promise(resolve => {
+                const apiScript = document.createElement('script');
+                apiScript.src = '../scripts/api-service.js';
+                apiScript.onload = resolve;
+                document.body.appendChild(apiScript);
+            });
+
+            // Load menu and dashboard scripts in parallel after API loads
+            await loadAPI;
+            
+            const scripts = [
+                '../scripts/load-menu.js',
+                '../scripts/student-dashboard.js'
+            ].map(src => {
+                const script = document.createElement('script');
+                script.src = src;
+                document.body.appendChild(script);
+                return new Promise(resolve => script.onload = resolve);
+            });
+
+            await Promise.all(scripts);
+        }
+    </script>
+</head>
+<body style="visibility: hidden;">
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar" role="navigation" aria-label="Main navigation">
+            <nav class="dashboard-nav">
+                <div class="nav-section">
+                    <h3>LEARNING</h3>
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        Overview
+                    </a>
+                    <a href="progress.html" class="nav-item">
+                        <i class="fas fa-chart-line"></i>
+                        Progress
+                    </a>
+                    <a href="achievements.html" class="nav-item">
+                        <i class="fas fa-trophy"></i>
+                        Achievements
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>STUDY</h3>
+                    <a href="lessons.html" class="nav-item">
+                        <i class="fas fa-book-open"></i>
+                        Lessons
+                    </a>
+                    <a href="assignments.html" class="nav-item">
+                        <i class="fas fa-tasks"></i>
+                        Assignments
+                    </a>
+                    <a href="flashcards.html" class="nav-item active">
+                        <i class="fas fa-clone"></i>
+                        Flashcards
+                    </a>
+                    <a href="vocabulary.html" class="nav-item">
+                        <i class="fas fa-language"></i>
+                        Vocabulary
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>RESOURCES</h3>
+                    <a href="resources.html" class="nav-item">
+                        <i class="fas fa-folder"></i>
+                        Resources
+                    </a>
+                    <a href="help.html" class="nav-item">
+                        <i class="fas fa-question-circle"></i>
+                        Help & Support
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main" id="main-content" tabindex="-1">
+            <div class="flashcards-container">
+                <div class="flashcards-header">
+                    <h2>Flashcards</h2>
+                    <div class="deck-controls">
+                        <select class="deck-select" id="deckSelect">
+                            <option value="all">All Decks</option>
+                            <option value="basics">Spanish Basics</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="travel">Travel Essentials</option>
+                            <option value="grammar">Grammar Rules</option>
+                        </select>
+                        <button class="btn btn-primary" id="createDeckBtn">
+                            <i class="fas fa-plus"></i> Create New Deck
+                        </button>
+                    </div>
+                </div>
+
+                <div class="decks-grid" id="decksList">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <div class="study-mode hidden" id="studyMode">
+                    <div class="study-header">
+                        <h3 id="deckTitle">Deck Title</h3>
+                        <div class="study-controls">
+                            <span class="progress-text">Card 1 of 20</span>
+                            <button class="btn btn-secondary" id="shuffleBtn">
+                                <i class="fas fa-random"></i> Shuffle
+                            </button>
+                            <button class="btn btn-secondary" id="exitStudyBtn">
+                                <i class="fas fa-times"></i> Exit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flashcard" id="currentCard">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <!-- Front content will be added by JavaScript -->
+                            </div>
+                            <div class="flashcard-back">
+                                <!-- Back content will be added by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="study-actions">
+                        <button class="btn btn-large" id="wrongBtn">
+                            <i class="fas fa-times"></i> Wrong
+                        </button>
+                        <button class="btn btn-large" id="flipBtn">
+                            <i class="fas fa-sync"></i> Flip
+                        </button>
+                        <button class="btn btn-large" id="rightBtn">
+                            <i class="fas fa-check"></i> Right
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Progress - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/progress.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+    <script src="scripts/progress.js" type="module"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <h2>My Progress</h2>
+                    <div class="time-filter">
+                        <select id="timeRange">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="progress-overview">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Study Time</h3>
+                            <p class="stat-number">0 hrs</p>
+                            <span class="stat-trend positive">+0 hrs this week</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>XP Earned</h3>
+                            <p class="stat-number">0</p>
+                            <span class="stat-trend positive">+0 this week</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Lessons Completed</h3>
+                            <p class="stat-number">0</p>
+                            <span class="stat-trend">This week</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Goals Met</h3>
+                            <p class="stat-number">0/3</p>
+                            <span class="stat-trend">Active goals</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- Learning Activity Chart -->
+                    <div class="chart-container">
+                        <h3>Learning Activity</h3>
+                        <canvas id="activityChart"></canvas>
+                    </div>
+
+                    <!-- Vocabulary Growth Chart -->
+                    <div class="chart-container">
+                        <h3>Vocabulary Growth</h3>
+                        <canvas id="vocabularyChart"></canvas>
+                    </div>
+
+                    <!-- Skills Progress Chart -->
+                    <div class="chart-container">
+                        <h3>Skills Progress</h3>
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+
+                    <!-- Performance Metrics Chart -->
+                    <div class="chart-container">
+                        <h3>Performance Metrics</h3>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="progress-details">
+                    <div class="detail-section">
+                        <h3>Recent Achievements</h3>
+                        <div class="achievements-list" id="recentAchievements">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Learning Streak</h3>
+                        <div class="streak-calendar" id="streakCalendar">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const progressScript = document.createElement('script');
+            progressScript.src = '../scripts/progress.js';
+            document.body.appendChild(progressScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Learning Activity Chart
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            new Chart(activityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Study Minutes',
+                        data: [45, 60, 30, 90, 45, 75, 60],
+                        backgroundColor: '#3498db'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Minutes'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Vocabulary Growth Chart
+            const vocabCtx = document.getElementById('vocabularyChart').getContext('2d');
+            new Chart(vocabCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Words Learned',
+                        data: [20, 45, 75, 100],
+                        borderColor: '#2ecc71',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Total Words'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Skills Progress Chart
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Reading', 'Writing', 'Speaking', 'Listening', 'Grammar', 'Vocabulary'],
+                    datasets: [{
+                        label: 'Current Level',
+                        data: [70, 65, 60, 75, 80, 85],
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: '#3498db',
+                        pointBackgroundColor: '#3498db'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Performance Metrics Chart
+            const perfCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(perfCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Quiz 1', 'Quiz 2', 'Quiz 3', 'Quiz 4', 'Quiz 5'],
+                    datasets: [{
+                        label: 'Quiz Scores',
+                        data: [85, 90, 88, 92, 95],
+                        borderColor: '#9b59b6',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Score (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

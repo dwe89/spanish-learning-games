@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/achievements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+    <style>
+        .achievements-container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievement-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .category h3 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achievement-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+        }
+
+        .achievement-icon.locked {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .achievement-icon.unlocked {
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            color: white;
+            animation: unlock-pulse 1s ease-out;
+        }
+
+        .achievement-details {
+            flex: 1;
+        }
+
+        .achievement-details h4 {
+            color: #2c3e50;
+            margin: 0 0 5px;
+            font-size: 1.1em;
+        }
+
+        .achievement-details p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f1c40f 0%, #f39c12 100%);
+            transition: width 0.3s ease;
+        }
+
+        @keyframes unlock-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .stats-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="achievements-container">
+                <div class="achievements-header">
+                    <h2>Achievements</h2>
+                    <div class="achievements-stats">
+                        <div class="stat">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Total Achievements</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">0%</span>
+                            <span class="stat-label">Completion Rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-categories">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="learning">Learning</button>
+                    <button class="category-btn" data-category="social">Social</button>
+                    <button class="category-btn" data-category="milestones">Milestones</button>
+                    <button class="category-btn" data-category="challenges">Challenges</button>
+                </div>
+
+                <div class="achievements-grid">
+                    <!-- Achievement cards will be populated by JavaScript -->
+                </div>
+
+                <div class="achievement-details-modal" id="achievementModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Achievement Details</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="achievement-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h4 class="achievement-title"></h4>
+                            <p class="achievement-description"></p>
+                            <div class="achievement-progress">
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <span class="progress-text">0/1</span>
+                            </div>
+                            <div class="achievement-rewards">
+                                <h5>Rewards</h5>
+                                <ul class="rewards-list">
+                                    <!-- Rewards will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const achievementsScript = document.createElement('script');
+            achievementsScript.src = '../scripts/achievements.js';
+            document.body.appendChild(achievementsScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

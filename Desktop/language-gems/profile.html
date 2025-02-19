@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Language Gems</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="styles/achievements.css">
+    <script src="scripts/load-menu.js" defer></script>
+    <script src="scripts/profile.js" defer></script>
+    <script src="scripts/progress-tracker.js" defer></script>
+    <script src="scripts/achievement-system.js" defer></script>
+</head>
+<body>
+    <div id="menu-container"></div>
+    
+    <main class="main-content">
+        <div class="profile-container">
+            <a href="/profile.html" class="profile-header">
+                <div class="profile-avatar">
+                    <img id="userAvatar" src="assets/default-avatar.png" alt="User Avatar">
+                    <button id="changeAvatarBtn" class="btn-change-avatar">Change Avatar</button>
+                </div>
+                <div class="profile-info">
+                    <h1 id="userName">Welcome!</h1>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="totalPoints">-</span>
+                            <span class="stat-label">Points</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="gamesPlayed">-</span>
+                            <span class="stat-label">Games</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="achievements">-</span>
+                            <span class="stat-label">Achievements</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="dashboard-grid">
+                <section class="dashboard-section progress-section">
+                    <h2>Learning Progress</h2>
+                    <div class="progress-charts">
+                        <div class="progress-item">
+                            <h3>Spanish Progress</h3>
+                            <div class="progress-bar">
+                                <div id="spanishProgress" class="progress" style="width: 0%">Start Learning</div>
+                            </div>
+                            <div class="skill-breakdown">
+                                <div class="skill">
+                                    <span class="skill-label">Vocabulary</span>
+                                    <div class="skill-bar">
+                                        <div id="spanishVocabulary" class="skill-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="skill">
+                                    <span class="skill-label">Grammar</span>
+                                    <div class="skill-bar">
+                                        <div id="spanishGrammar" class="skill-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="skill">
+                                    <span class="skill-label">Pronunciation</span>
+                                    <div class="skill-bar">
+                                        <div id="spanishPronunciation" class="skill-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-section achievements-section">
+                    <h2>Recent Achievements</h2>
+                    <div class="achievement-categories">
+                        <button class="category-button active" data-category="all">All</button>
+                        <button class="category-button" data-category="xp">XP</button>
+                        <button class="category-button" data-category="streak">Streaks</button>
+                        <button class="category-button" data-category="game">Games</button>
+                        <button class="category-button" data-category="language">Language</button>
+                    </div>
+                    <div id="achievementsList" class="achievements-grid">
+                        <!-- Achievements will be populated dynamically -->
+                        <p class="empty-state">Complete activities to earn achievements!</p>
+                    </div>
+                </section>
+
+                <section class="dashboard-section game-stats">
+                    <h2>Game Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="game-stat-card">
+                            <h3>Word Match</h3>
+                            <div class="stat-details">
+                                <p>Best Score: <span id="wordMatchBest">-</span></p>
+                                <p>Games Played: <span id="wordMatchPlayed">-</span></p>
+                                <p>Accuracy: <span id="wordMatchAccuracy">-</span></p>
+                            </div>
+                        </div>
+                        <div class="game-stat-card">
+                            <h3>Emoji Match</h3>
+                            <div class="stat-details">
+                                <p>Best Score: <span id="emojiMatchBest">-</span></p>
+                                <p>Games Played: <span id="emojiMatchPlayed">-</span></p>
+                                <p>Accuracy: <span id="emojiMatchAccuracy">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="profile-settings">
+                <h2>Profile Settings</h2>
+                <form id="profileSettingsForm" class="settings-form">
+                    <div class="form-group">
+                        <label for="displayName">Display Name</label>
+                        <input type="text" id="displayName" name="displayName">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Preferred Language</label>
+                        <select id="language" name="language">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Notification Preferences</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="notifications" value="achievements"> Achievement Updates
+                            </label>
+                            <label>
+                                <input type="checkbox" name="notifications" value="progress"> Progress Reports
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save Changes</button>
+                        <button type="button" class="btn-danger" id="logoutBtn">Logout</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Avatar Change Modal -->
+    <div id="avatarModal" class="modal">
+        <div class="modal-content">
+            <h2>Change Avatar</h2>
+            <div class="avatar-options">
+                <div class="avatar-upload">
+                    <label for="avatarUpload" class="upload-label">
+                        <i class="fas fa-upload"></i>
+                        Upload Image
+                    </label>
+                    <input type="file" id="avatarUpload" accept="image/*" hidden>
+                </div>
+                <div class="avatar-preview">
+                    <img id="avatarPreview" src="assets/default-avatar.png" alt="Avatar Preview">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="cancelAvatarBtn" class="btn-secondary">Cancel</button>
+                <button id="saveAvatarBtn" class="btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html> 

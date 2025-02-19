@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/help.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="help-container">
+                <div class="help-header">
+                    <h2>Help & Support</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="helpSearch" placeholder="Search help articles...">
+                    </div>
+                </div>
+
+                <div class="help-content">
+                    <div class="help-sidebar">
+                        <div class="help-nav">
+                            <button class="nav-btn active" data-section="getting-started">
+                                <i class="fas fa-rocket"></i> Getting Started
+                            </button>
+                            <button class="nav-btn" data-section="lessons">
+                                <i class="fas fa-book"></i> Lessons
+                            </button>
+                            <button class="nav-btn" data-section="practice">
+                                <i class="fas fa-tasks"></i> Practice
+                            </button>
+                            <button class="nav-btn" data-section="account">
+                                <i class="fas fa-user"></i> Account
+                            </button>
+                            <button class="nav-btn" data-section="troubleshooting">
+                                <i class="fas fa-wrench"></i> Troubleshooting
+                            </button>
+                            <button class="nav-btn" data-section="contact">
+                                <i class="fas fa-envelope"></i> Contact Support
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="help-main">
+                        <!-- Getting Started Section -->
+                        <div class="help-section active" id="getting-started">
+                            <h3>Getting Started</h3>
+                            <div class="article-list">
+                                <div class="article-card">
+                                    <h4>Welcome to Language Gems</h4>
+                                    <p>Learn how to get started with your language learning journey.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Setting Up Your Profile</h4>
+                                    <p>Customize your profile and learning preferences.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Understanding Your Dashboard</h4>
+                                    <p>Navigate through your personalized dashboard.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lessons Section -->
+                        <div class="help-section" id="lessons">
+                            <h3>Lessons</h3>
+                            <div class="article-list">
+                                <div class="article-card">
+                                    <h4>Lesson Structure</h4>
+                                    <p>Understanding how lessons are organized.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Progress Tracking</h4>
+                                    <p>Monitor your learning progress effectively.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practice Section -->
+                        <div class="help-section" id="practice">
+                            <h3>Practice</h3>
+                            <div class="article-list">
+                                <div class="article-card">
+                                    <h4>Practice Modes</h4>
+                                    <p>Different ways to practice your language skills.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Using Flashcards</h4>
+                                    <p>Make the most of the flashcard system.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Section -->
+                        <div class="help-section" id="account">
+                            <h3>Account</h3>
+                            <div class="article-list">
+                                <div class="article-card">
+                                    <h4>Account Settings</h4>
+                                    <p>Manage your account preferences and security.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Subscription Management</h4>
+                                    <p>Handle your subscription and billing.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Troubleshooting Section -->
+                        <div class="help-section" id="troubleshooting">
+                            <h3>Troubleshooting</h3>
+                            <div class="article-list">
+                                <div class="article-card">
+                                    <h4>Common Issues</h4>
+                                    <p>Solutions to frequently encountered problems.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="article-card">
+                                    <h4>Technical Requirements</h4>
+                                    <p>System requirements and browser compatibility.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Support Section -->
+                        <div class="help-section" id="contact">
+                            <h3>Contact Support</h3>
+                            <div class="contact-options">
+                                <div class="contact-card">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                    <h4>Email Support</h4>
+                                    <p>Get help via email within 24 hours</p>
+                                    <button class="btn btn-primary">Send Email</button>
+                                </div>
+                                <div class="contact-card">
+                                    <i class="fas fa-comments"></i>
+                                    <h4>Live Chat</h4>
+                                    <p>Chat with our support team</p>
+                                    <button class="btn btn-primary">Start Chat</button>
+                                </div>
+                                <div class="contact-card">
+                                    <i class="fas fa-book-open"></i>
+                                    <h4>Knowledge Base</h4>
+                                    <p>Browse our help articles</p>
+                                    <button class="btn btn-primary">View Articles</button>
+                                </div>
+                            </div>
+
+                            <div class="support-form">
+                                <h4>Send us a message</h4>
+                                <form id="supportForm">
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" id="subject" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <select id="category" required>
+                                            <option value="technical">Technical Issue</option>
+                                            <option value="account">Account</option>
+                                            <option value="billing">Billing</option>
+                                            <option value="feedback">Feedback</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" rows="5" required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const helpScript = document.createElement('script');
+            helpScript.src = '../scripts/help.js';
+            document.body.appendChild(helpScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 

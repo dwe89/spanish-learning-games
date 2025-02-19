@@ -1,0 +1,185 @@
+/* Class Analytics Dashboard Styles */
+
+/* Main Container */
+.analytics-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Analytics Grid Layout */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Analytics Card */
+.analytics-card {
+    background: var(--surface-color, #ffffff);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analytics-card h3 {
+    margin: 0 0 1rem;
+    color: var(--text-primary, #333);
+    font-size: 1.25rem;
+}
+
+/* Charts Container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 1.5rem;
+}
+
+/* Data Tables */
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.analytics-table th,
+.analytics-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color, #eee);
+}
+
+.analytics-table th {
+    background-color: var(--surface-variant, #f5f5f5);
+    font-weight: 600;
+}
+
+.analytics-table tr:hover {
+    background-color: var(--hover-color, #f8f8f8);
+}
+
+/* Filters Section */
+.analytics-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: var(--text-secondary, #666);
+}
+
+.filter-group select,
+.filter-group input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 4px;
+    background-color: var(--surface-color, #fff);
+}
+
+/* Progress Indicators */
+.progress-bar {
+    height: 8px;
+    background-color: var(--surface-variant, #f0f0f0);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--primary-color, #4CAF50);
+    transition: width 0.3s ease;
+}
+
+/* Student Performance Cards */
+.performance-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color, #eee);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.performance-card img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.performance-info {
+    flex: 1;
+}
+
+.performance-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #666);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .analytics-container {
+        padding: 1rem;
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-filters {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .performance-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .analytics-container {
+        padding: 0;
+    }
+
+    .analytics-filters {
+        display: none;
+    }
+
+    .analytics-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

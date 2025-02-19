@@ -1,0 +1,147 @@
+/* Grammar Layout */
+.grammar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-2xl);
+}
+
+/* Grammar Topics */
+.grammar-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.topic-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+}
+
+.topic-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--accent-color);
+}
+
+.topic-title {
+    font-size: var(--font-size-xl);
+    color: var(--white);
+    margin-bottom: var(--space-sm);
+}
+
+.topic-description {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+}
+
+/* Grammar Rules */
+.grammar-rule {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.rule-title {
+    font-size: var(--font-size-lg);
+    color: var(--accent-color);
+    margin-bottom: var(--space-md);
+}
+
+.rule-explanation {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
+/* Examples */
+.example-list {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.example-item {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.example-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.example-original {
+    color: var(--white);
+    font-weight: bold;
+    margin-bottom: var(--space-xs);
+}
+
+.example-translation {
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+/* Practice Section */
+.practice-section {
+    margin-top: var(--space-2xl);
+}
+
+.practice-exercises {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}
+
+.exercise-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+}
+
+.exercise-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+    color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grammar-container {
+        padding: var(--space-lg);
+    }
+
+    .grammar-topics {
+        grid-template-columns: 1fr;
+    }
+
+    .topic-card {
+        padding: var(--space-lg);
+    }
+
+    .grammar-rule {
+        padding: var(--space-lg);
+    }
+
+    .practice-exercises {
+        grid-template-columns: 1fr;
+    }
+} 

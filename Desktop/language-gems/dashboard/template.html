@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGE_TITLE - Language Gems</title>
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <!-- Page specific style - replace with actual page CSS -->
+    <link rel="stylesheet" href="../styles/PAGE_SPECIFIC.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Scripts -->
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            if (await DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                loadingOverlay.classList.remove('active');
+                document.body.style.visibility = 'visible';
+            }
+        });
+
+        async function loadScripts() {
+            // Create a promise for API service loading
+            const loadAPI = new Promise(resolve => {
+                const apiScript = document.createElement('script');
+                apiScript.src = '../scripts/api-service.js';
+                apiScript.onload = resolve;
+                document.body.appendChild(apiScript);
+            });
+
+            // Load menu and dashboard scripts in parallel after API loads
+            await loadAPI;
+            
+            const scripts = [
+                '../scripts/load-menu.js',
+                '../scripts/student-dashboard.js'
+            ].map(src => {
+                const script = document.createElement('script');
+                script.src = src;
+                document.body.appendChild(script);
+                return new Promise(resolve => script.onload = resolve);
+            });
+
+            await Promise.all(scripts);
+        }
+    </script>
+</head>
+<body style="visibility: hidden;">
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar" role="navigation" aria-label="Main navigation">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main" id="main-content" tabindex="-1">
+            <!-- Page specific content goes here -->
+        </main>
+    </div>
+</body>
+</html> 

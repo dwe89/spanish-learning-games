@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Language Gems</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard-menu.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden">
+    <!-- Menu Container -->
+    <div id="menu-container"></div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <div class="nav-section">
+                    <h3>Overview</h3>
+                    <a href="#overview" class="nav-item active">
+                        <i class="fas fa-chart-line"></i>
+                        Dashboard
+                    </a>
+                    <a href="#progress" class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        Progress
+                    </a>
+                    <a href="#achievements" class="nav-item">
+                        <i class="fas fa-trophy"></i>
+                        Achievements
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Learning</h3>
+                    <a href="#activities" class="nav-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        Activities
+                    </a>
+                    <a href="flashcards.html" class="nav-item">
+                        <i class="fas fa-clone"></i>
+                        Flashcards
+                    </a>
+                    <a href="vocabulary.html" class="nav-item">
+                        <i class="fas fa-book"></i>
+                        Vocabulary
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Resources</h3>
+                    <a href="assignments.html" class="nav-item">
+                        <i class="fas fa-tasks"></i>
+                        Assignments
+                    </a>
+                    <a href="notes.html" class="nav-item">
+                        <i class="fas fa-sticky-note"></i>
+                        Notes
+                    </a>
+                    <a href="resources.html" class="nav-item">
+                        <i class="fas fa-folder"></i>
+                        Resources
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Profile Section -->
+                <section id="overview" class="dashboard-section active">
+                <div class="profile-section"></div>
+                
+                <!-- Progress Overview -->
+                <div class="progress-section">
+                    <h2>Progress Overview</h2>
+                    <div class="progress-chart">
+                        <canvas id="progressChart"></canvas>
+                            </div>
+                    <div class="recent-activities"></div>
+                        </div>
+
+                <!-- Assignments -->
+                <div class="assignments-section">
+                    <h2>Current Assignments</h2>
+                    <div class="assignments-list"></div>
+                    </div>
+                </section>
+
+            <!-- Progress Section -->
+                <section id="progress" class="dashboard-section">
+                        <h2>My Progress</h2>
+                <div class="progress-filters">
+                    <select id="activityFilter">
+                        <option value="all">All Activities</option>
+                        <option value="vocabulary">Vocabulary</option>
+                        <option value="grammar">Grammar</option>
+                        <option value="listening">Listening</option>
+                        <option value="speaking">Speaking</option>
+                    </select>
+                    <select id="timeFilter">
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                                <option value="all">All Time</option>
+                            </select>
+                        </div>
+                <div class="detailed-progress"></div>
+                </section>
+
+            <!-- Achievements Section -->
+                <section id="achievements" class="dashboard-section">
+                <h2>My Achievements</h2>
+                <div class="achievements-grid"></div>
+                </section>
+
+            <!-- Activities Section -->
+            <section id="activities" class="dashboard-section">
+                <h2>Learning Activities</h2>
+                <div class="activities-grid">
+                    <div class="activity-card" data-activity="vocabulary">
+                                    <i class="fas fa-book"></i>
+                        <h3>Vocabulary</h3>
+                        <p>Learn new words and phrases</p>
+                                </div>
+                    <div class="activity-card" data-activity="grammar">
+                        <i class="fas fa-pencil-alt"></i>
+                        <h3>Grammar</h3>
+                        <p>Practice Spanish grammar rules</p>
+                                </div>
+                    <div class="activity-card" data-activity="listening">
+                        <i class="fas fa-headphones"></i>
+                        <h3>Listening</h3>
+                        <p>Improve your listening skills</p>
+                        </div>
+                    </div>
+                </section>
+        </main>
+    </div>
+
+    <!-- Error Message Container -->
+    <div class="error-message" style="display: none;"></div>
+
+    <!-- Success Message Container -->
+    <div class="success-message" style="display: none;"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="../components/Dashboard/student-dashboard.js"></script>
+</body>
+</html> 

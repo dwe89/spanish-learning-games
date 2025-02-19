@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Language Gems</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/messages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../scripts/dashboard-auth.js"></script>
+    <script src="../scripts/load-menu.js"></script>
+</head>
+<body style="visibility: hidden;">
+    <div id="menu-container"></div>
+
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <!-- Sidebar content will be loaded by load-menu.js -->
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="messages-container">
+                <div class="messages-header">
+                    <h2>Messages</h2>
+                    <button class="btn btn-primary" id="newMessageBtn">
+                        <i class="fas fa-plus"></i> New Message
+                    </button>
+                </div>
+
+                <div class="messages-content">
+                    <div class="conversations-list">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchConversations" placeholder="Search conversations...">
+                        </div>
+                        <div class="conversations" id="conversationsList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="conversation-view">
+                        <div class="conversation-header">
+                            <div class="participant-info">
+                                <img src="../images/avatars/default.png" alt="Participant" class="participant-avatar">
+                                <div class="participant-details">
+                                    <h3 class="participant-name">Select a conversation</h3>
+                                    <span class="participant-status"></span>
+                                </div>
+                            </div>
+                            <div class="conversation-actions">
+                                <button class="btn btn-icon" title="Video Call">
+                                    <i class="fas fa-video"></i>
+                                </button>
+                                <button class="btn btn-icon" title="Voice Call">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn btn-icon" title="More Options">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="messages-view" id="messagesView">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <div class="message-input">
+                            <div class="input-actions">
+                                <button class="btn btn-icon" title="Attach File">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button class="btn btn-icon" title="Record Audio">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                            </div>
+                            <input type="text" id="messageInput" placeholder="Type a message...">
+                            <button class="btn btn-send" id="sendMessageBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Message Modal -->
+            <div class="modal" id="newMessageModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>New Message</h3>
+                        <button class="close-btn">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipientInput">To:</label>
+                            <input type="text" id="recipientInput" placeholder="Search for users...">
+                        </div>
+                        <div class="recipients-list" id="recipientsList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        <div class="form-group">
+                            <label for="messageText">Message:</label>
+                            <textarea id="messageText" rows="4" placeholder="Write your message..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="cancelMessage">Cancel</button>
+                        <button class="btn btn-primary" id="sendNewMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadScripts() {
+            const apiScript = document.createElement('script');
+            apiScript.src = '../scripts/api-service.js';
+            document.body.appendChild(apiScript);
+            await new Promise(resolve => apiScript.onload = resolve);
+
+            const messagesScript = document.createElement('script');
+            messagesScript.src = '../scripts/messages.js';
+            document.body.appendChild(messagesScript);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (DashboardAuth.checkAuth()) {
+                await loadScripts();
+                DashboardAuth.updateUI();
+                document.body.style.visibility = 'visible';
+            }
+        });
+    </script>
+</body>
+</html> 
